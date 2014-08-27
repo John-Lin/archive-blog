@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[筆記] Install Ryu 3.5 - SDN Framework  | John&#39;s Lin Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在安裝 Ryu 的過程中並沒有像官方網站所說的那麼順利，踩到一些莫名的小地雷在這邊做一下筆記。
+[更新 2014/02/15] 這是 Ryu 3.5 時做的筆記，目前已經更新為 Ryu 3.6 請參考[最新版的安裝方法]!
+[問題]
+
+官方版安裝方教學 宣稱可以選用 
+1$ sudo pip install ryu
+
+或是從 Github 上 clone 原始碼下來安裝
+12$ git clone">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[筆記] Install Ryu 3.5 - SDN Framework ">
+<meta property="og:url" content="http://linton.tw/2014/01/11/install-ryu-3-5-sdn-framework/">
+<meta property="og:site_name" content="John's Lin Blog">
+<meta property="og:description" content="在安裝 Ryu 的過程中並沒有像官方網站所說的那麼順利，踩到一些莫名的小地雷在這邊做一下筆記。
+[更新 2014/02/15] 這是 Ryu 3.5 時做的筆記，目前已經更新為 Ryu 3.6 請參考[最新版的安裝方法]!
+[問題]
+
+官方版安裝方教學 宣稱可以選用 
+1$ sudo pip install ryu
+
+或是從 Github 上 clone 原始碼下來安裝
+12$ git clone">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[筆記] Install Ryu 3.5 - SDN Framework ">
+<meta name="twitter:description" content="在安裝 Ryu 的過程中並沒有像官方網站所說的那麼順利，踩到一些莫名的小地雷在這邊做一下筆記。
+[更新 2014/02/15] 這是 Ryu 3.5 時做的筆記，目前已經更新為 Ryu 3.6 請參考[最新版的安裝方法]!
+[問題]
+
+官方版安裝方教學 宣稱可以選用 
+1$ sudo pip install ryu
+
+或是從 Github 上 clone 原始碼下來安裝
+12$ git clone">
+<meta name="twitter:creator" content="@[object Object]">
+
+  
+    <link rel="alternative" href="/atom.xml" title="John&#39;s Lin Blog" type="application/atom+xml">
+  
+  
+  <!--<link rel="icon" href="/favicon.png">-->
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-47712773-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">John&#39;s Lin Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Python / OpenFlow / Hack</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/John-Lin">GitHub</a>
+        
+          <a class="main-nav-link" href="/about">About Me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://linton.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-install-ryu-3-5-sdn-framework" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/01/11/install-ryu-3-5-sdn-framework/" class="article-date">
+  <time datetime="2014-01-10T19:58:00.000Z" itemprop="datePublished">1月 11 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [筆記] Install Ryu 3.5 - SDN Framework 
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在安裝 Ryu 的過程中並沒有像官方網站所說的那麼順利，踩到一些莫名的小地雷在這邊做一下筆記。</p>
+<h3 id="[更新_2014/02/15]_這是_Ryu_3-5_時做的筆記，目前已經更新為_Ryu_3-6_請參考[最新版的安裝方法]!">[更新 2014/02/15] 這是 Ryu 3.5 時做的筆記，目前已經更新為 Ryu 3.6 請參考[最新版的安裝方法]!</h3>
+<h3 id="[問題]">[問題]</h3>
+<hr>
+<p><a href="http://osrg.github.io/ryu/" target="_blank" rel="external"><strong>官方版安裝方教學</strong></a> 宣稱可以選用 </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">sudo</span> pip install ryu</div></pre></td></tr></table></figure>
+
+<p>或是從 Github 上 clone 原始碼下來安裝</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/osrg/ryu.git</div><div class="line">$ <span class="keyword">cd</span> ryu; <span class="keyword">python</span> ./setup.<span class="keyword">py</span> install</div></pre></td></tr></table></figure>
+
+<p>以上兩種我都試過， <strong>沒辦法順利的安裝</strong> ，似乎會少一些相依性的套件？</p>
+<a id="more"></a>
+
+<h3 id="[解決方法]">[解決方法]</h3>
+<hr>
+<p>我先用 <code>sudo pip install ryu</code> 之後 ，在執行 <code>ryu-manager</code> 時會出現一些錯誤，請注意最後幾行錯誤訊息，會抱怨少了什麼套件，套件名稱如下請用 <code>sudo pip install</code>手動重新裝過補齊（大約缺了5個套件）。</p>
+<p>這邊列出缺少的套件，請用 <code>sudo pip install</code> 逐一安裝</p>
+<ul>
+<li>msgpack-python </li>
+<li>oslo.config </li>
+<li>netaddr </li>
+<li>lxml</li>
+<li>ecdsa</li>
+</ul>
+<p><strong>請注意：</strong>其中有一個套件 <strong>lxml</strong> 在使用 <code>sudo pip install lxml</code> 也沒辦法順利安裝，似乎又少了某些相依的函式庫?</p>
+<p>請將 <strong>lxml</strong> 所需要的函式庫補齊，在 Command Line 下安裝以下的套件：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">sudo</span> apt-get install libxml2-dev libxslt1-dev python2.<span class="number">7</span>-dev</div></pre></td></tr></table></figure>
+
+<p>將 lxml 裝上之後，在執行 <code>ryu-manger</code> 時還會抱怨少一個套件 <strong>(ecdsa)</strong> ，再用 <code>sudo pip isntall</code> 裝上，就可以順利執行。</p>
+<h3 id="[2014/1/14_新增]">[2014/1/14 新增]</h3>
+<hr>
+<p>Ryu 有一些相依性的套件必須要安裝，請用 <code>sudo apt-get install</code> 來安裝</p>
+<ul>
+<li>python-eventlet</li>
+<li>python-routes</li>
+<li>python-webob</li>
+<li>python-paramiko</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-<span class="built_in">get</span> install <span class="keyword">python</span>-eventlet <span class="keyword">python</span>-routes <span class="keyword">python</span>-webob <span class="keyword">python</span>-paramiko</div></pre></td></tr></table></figure>
+
+<hr>
+<p>若安裝過程還是有問題，可以寄信給我或是在下面留言與我討論 =)</p>
+<p>十分歡迎有在研究 SDN 的朋友一起討論!!<br>Email Address : <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#x3a;&#108;&#x69;&#x6e;&#116;&#x6f;&#110;&#x40;&#x69;&#x69;&#x69;&#x2e;&#111;&#x72;&#x67;&#x2e;&#x74;&#x77;">&#108;&#x69;&#x6e;&#116;&#x6f;&#110;&#x40;&#x69;&#x69;&#x69;&#x2e;&#111;&#x72;&#x67;&#x2e;&#x74;&#x77;</a>  ;  <a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#58;&#x69;&#x72;&#101;&#114;&#x69;&#x33;&#x33;&#57;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#x6d;">&#x69;&#x72;&#101;&#114;&#x69;&#x33;&#x33;&#57;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#x6d;</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://linton.tw/2014/01/11/install-ryu-3-5-sdn-framework/" data-id="ao18gojopg6tfdeu" class="article-share-link">Share</a>
+      
+        <a href="http://linton.tw/2014/01/11/install-ryu-3-5-sdn-framework/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenFlow/">OpenFlow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ryu/">Ryu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SDN/">SDN</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/01/31/bug-office-for-mac-2011-shortcuts-fail/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [Bug] Office for Mac 2011 快捷鍵失效之有效解決方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2013/12/03/raspberry-pi-x-sht15-humidity-detection/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Raspberry Pi X SHT15 溫濕度偵測</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Amazon-EC2/" style="font-size: 10.00px;">Amazon EC2</a><a href="/tags/Aten-UC-232A/" style="font-size: 10.00px;">Aten UC-232A</a><a href="/tags/BUPT/" style="font-size: 10.00px;">BUPT</a><a href="/tags/Computer-Network/" style="font-size: 10.00px;">Computer Network</a><a href="/tags/Controller/" style="font-size: 10.00px;">Controller</a><a href="/tags/Flask/" style="font-size: 10.00px;">Flask</a><a href="/tags/Hexo/" style="font-size: 10.00px;">Hexo</a><a href="/tags/Lagopus/" style="font-size: 10.00px;">Lagopus</a><a href="/tags/Linux-Mint/" style="font-size: 10.00px;">Linux Mint</a><a href="/tags/Mac-OS-X-Mavericks/" style="font-size: 10.00px;">Mac OS X Mavericks</a><a href="/tags/NAS/" style="font-size: 10.00px;">NAS</a><a href="/tags/Open-vSwitch/" style="font-size: 10.00px;">Open vSwitch</a><a href="/tags/OpenFlow/" style="font-size: 16.67px;">OpenFlow</a><a href="/tags/Openwrt/" style="font-size: 10.00px;">Openwrt</a><a href="/tags/Pyinstaller/" style="font-size: 10.00px;">Pyinstaller</a><a href="/tags/Python/" style="font-size: 20.00px;">Python</a><a href="/tags/Raspberry-Pi/" style="font-size: 10.00px;">Raspberry Pi</a><a href="/tags/Ryu/" style="font-size: 13.33px;">Ryu</a><a href="/tags/Ryu-with-GUI/" style="font-size: 10.00px;">Ryu with GUI</a><a href="/tags/SDN/" style="font-size: 16.67px;">SDN</a><a href="/tags/SHT15/" style="font-size: 10.00px;">SHT15</a><a href="/tags/Scapy/" style="font-size: 10.00px;">Scapy</a><a href="/tags/Snort/" style="font-size: 10.00px;">Snort</a><a href="/tags/TL-1043ND/" style="font-size: 10.00px;">TL-1043ND</a><a href="/tags/Tkinter/" style="font-size: 10.00px;">Tkinter</a><a href="/tags/USB-to-Serial/" style="font-size: 10.00px;">USB to Serial</a><a href="/tags/Vim/" style="font-size: 10.00px;">Vim</a><a href="/tags/Vundle/" style="font-size: 10.00px;">Vundle</a><a href="/tags/Yahoo-Finance-API/" style="font-size: 10.00px;">Yahoo Finance API</a><a href="/tags/driver/" style="font-size: 10.00px;">driver</a><a href="/tags/exchange-rate/" style="font-size: 10.00px;">exchange rate</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/office-2011/" style="font-size: 10.00px;">office 2011</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10">October 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09">September 2013</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/08/17/Install-Snort-from-source-on-Ubuntu/">Install Snort from source on Ubuntu</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/11/NTT-Network-Innovation-Laboratories-SDN-Seminar/">NTT 未來網路研究所 SDN 研討會</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/08/My-first-time-using-hexo/">My first time using hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2014/07/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2014/07/28/in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver/">在 Mac OS X Mavericks 上安裝 Aten UC-232A USB to Serial 驅動程式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 John Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/John-Lin" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/about" class="mobile-nav-link">About Me</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'lintontw';
+  
+  var disqus_url = 'http://linton.tw/2014/01/11/install-ryu-3-5-sdn-framework/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+
+</body>
+</html>
+

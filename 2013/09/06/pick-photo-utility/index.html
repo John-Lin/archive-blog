@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>挑選照片工具程式 | John&#39;s Lin Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近在學習攝影時，發現拍照再按下快門那剎那其實不難，難的是拍完照片後需要挑選照片才頭痛。
+北海道 - 富良野的薰衣草
+安藤忠雄的建築作品 - 水教堂">
+<meta property="og:type" content="article">
+<meta property="og:title" content="挑選照片工具程式">
+<meta property="og:url" content="http://linton.tw/2013/09/06/pick-photo-utility/">
+<meta property="og:site_name" content="John's Lin Blog">
+<meta property="og:description" content="最近在學習攝影時，發現拍照再按下快門那剎那其實不難，難的是拍完照片後需要挑選照片才頭痛。
+北海道 - 富良野的薰衣草
+安藤忠雄的建築作品 - 水教堂">
+<meta property="og:image" content="http://user-image.logdown.io/user/3997/blog/4047/post/110308/c8WBIT4dTSKeqPNq6Pmx_IMG_5950.JPG">
+<meta property="og:image" content="http://farm6.staticflickr.com/5538/9638626344_17977cb1ab_b.jpg">
+<meta property="og:image" content="http://user-image.logdown.io/user/3997/blog/4047/post/110308/BlRX4sEFSceXSM31vEQs_demo.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="挑選照片工具程式">
+<meta name="twitter:description" content="最近在學習攝影時，發現拍照再按下快門那剎那其實不難，難的是拍完照片後需要挑選照片才頭痛。
+北海道 - 富良野的薰衣草
+安藤忠雄的建築作品 - 水教堂">
+<meta name="twitter:creator" content="@[object Object]">
+
+  
+    <link rel="alternative" href="/atom.xml" title="John&#39;s Lin Blog" type="application/atom+xml">
+  
+  
+  <!--<link rel="icon" href="/favicon.png">-->
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-47712773-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">John&#39;s Lin Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Python / OpenFlow / Hack</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/John-Lin">GitHub</a>
+        
+          <a class="main-nav-link" href="/about">About Me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://linton.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-pick-photo-utility" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/09/06/pick-photo-utility/" class="article-date">
+  <time datetime="2013-09-05T22:39:00.000Z" itemprop="datePublished">9月 6 2013</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      挑選照片工具程式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在學習攝影時，發現拍照再按下快門那剎那其實不難，難的是拍完照片後需要挑選照片才頭痛。</p>
+<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/110308/c8WBIT4dTSKeqPNq6Pmx_IMG_5950.JPG" alt="IMG_5950.JPG">北海道 - 富良野的薰衣草</p>
+<p><img src="http://farm6.staticflickr.com/5538/9638626344_17977cb1ab_b.jpg" alt="Tomamu"><br>安藤忠雄的建築作品 - 水教堂</p>
+<a id="more"></a>
+
+
+<h2 id="前言"><strong>前言</strong></h2>
+<hr>
+<p>上個禮拜從日本北海道回來，五天下來拍的照片居然高達1600張（含RAW檔），從這群海量照片裡挑選出一些精華分享到Facebook花費我相當大的精神與時間。挑選照片的方式最傳統的方式不外乎就是打開該資料夾，把變更資料夾的檢視方式，以縮圖來進行快速的瀏覽，而我有點龜毛想要開啟圖片一張張欣賞比較，再決定是否需要刪除或者留下這張照片。於是就開起第一張照片開始一張張欣賞，利用鍵盤的方向鍵能使我快速的轉換下一張，而如果想要留下這張照片的話就得回去資料夾的視窗，按下Ctrl加上滑鼠左鍵就能選擇想要的照片待看完一些數量的照片後就能把這群移動到另一個資料。</p>
+<p>可是問題就出在這!!你必須要再挑選照片時按著Ctrl，如果你沒有按著接下來就會發生慘絕人寰的悲劇，當你挑完一百多張照片準備在挑下一張時，Ctrl忘記按了…抱歉請你重選。我已經遭遇過無數次的悲劇。才會有接下來這個腳本程式的產生。</p>
+<h2 id="工具程式的誕生"><strong>工具程式的誕生</strong></h2>
+<hr>
+<p>無奈每次挑照片的不好經驗，索性就來寫幾支腳本幫助我增高挑照片的效率。</p>
+<p>程式放在我的<a href="https://github.com/John-Lin/Pic-helper" target="_blank" rel="external">GitHub</a>上，歡迎各位不吝指教。</p>
+<p><strong>主要程式有三個:</strong></p>
+<ul>
+<li><p><strong><a href="https://github.com/John-Lin/Pic-helper/blob/master/Pic_classify.py" target="_blank" rel="external">Pic_classipy.py</a></strong> :主要將所有不同副檔名的檔案做歸類。</p>
+<p>  因為每次旅遊回來相機都不只會有照片檔而已，或許會有影片檔和RAW檔，所以資料夾內就會充滿各種檔案，這支程式就先嘗試著把各個檔案依照不同的副檔名做分類，依照不同的副檔名程式會自動將他歸類。</p>
+</li>
+<li><p><strong><a href="https://github.com/John-Lin/Pic-helper/blob/master/Pic_selector.py" target="_blank" rel="external">Pic_selector.py</a></strong> : JPG檔挑選。</p>
+<pre><code>會被產生在/JPG資料夾底下，執行他就可以開始挑選想要的照片，只需要輸入相片的檔名數字序號，而各廠商的英文代碼不同，程式會自動處理不需要輸入。
+</code></pre></li>
+<li><p><strong><a href="https://github.com/John-Lin/Pic-helper/blob/master/RAW_selector.py" target="_blank" rel="external">RAW_selector.py</a></strong> : RAW檔挑選。</p>
+<pre><code>與前一個程式相同，只是他是挑選RAW檔的工具，會被自動產生在/RAW底下，用法則與前一個完全相同。
+</code></pre></li>
+</ul>
+<h2 id="各家廠商相機照片支援"><strong>各家廠商相機照片支援</strong></h2>
+<hr>
+<p>目前提供:</p>
+<ul>
+<li>Canon與Nikon的單眼相機</li>
+<li>Nikon Coolpix</li>
+<li>iPhone</li>
+</ul>
+<p>所產生的相片檔進行分類語與挑選。</p>
+<h2 id="後語"><strong>後語</strong></h2>
+<hr>
+<p>目前工具程式有讓幾位朋友使用，他們皆很給面子的說很方便XD</p>
+<p>不過也有人表示有GUI的介面使用起來會更加方便的，但是我目前還沒有往GUI方向去做的打算…</p>
+<p>另外為了方便Windows的使用者能不用下載Pyhton直譯器，就能直接運行程式我用了<a href="https://pypi.python.org/pypi/PyInstaller/2.0" target="_blank" rel="external">Pyinstaller 2.0</a>打包了三支程式。</p>
+<p>下載點放在這: <a href="https://mega.co.nz/#!hc1QxBaY!GN27zGD2X66aMCkEtU3SuErxuqAKJnEow1svSbvkZdw" target="_blank" rel="external">MEGA</a></p>
+<p>下載完後直接將三支程式放進要進行分類的資料夾內，先執行Pic_classify 即會產生像下圖的分類。</p>
+<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/110308/BlRX4sEFSceXSM31vEQs_demo.png" alt="demo.png"></p>
+<p>若需要挑選照片或RAW檔，只需進去JPG資料或RAW資料夾執行 Pic_selector 或 RAW_selector 程式及可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://linton.tw/2013/09/06/pick-photo-utility/" data-id="tsh003b7hw9i6ryb" class="article-share-link">Share</a>
+      
+        <a href="http://linton.tw/2013/09/06/pick-photo-utility/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2013/09/06/set-up-linux-mint-15/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          安裝 Linux Mint 15 &amp; Windows 7 雙作業系統
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Amazon-EC2/" style="font-size: 10.00px;">Amazon EC2</a><a href="/tags/Aten-UC-232A/" style="font-size: 10.00px;">Aten UC-232A</a><a href="/tags/BUPT/" style="font-size: 10.00px;">BUPT</a><a href="/tags/Computer-Network/" style="font-size: 10.00px;">Computer Network</a><a href="/tags/Controller/" style="font-size: 10.00px;">Controller</a><a href="/tags/Flask/" style="font-size: 10.00px;">Flask</a><a href="/tags/Hexo/" style="font-size: 10.00px;">Hexo</a><a href="/tags/Lagopus/" style="font-size: 10.00px;">Lagopus</a><a href="/tags/Linux-Mint/" style="font-size: 10.00px;">Linux Mint</a><a href="/tags/Mac-OS-X-Mavericks/" style="font-size: 10.00px;">Mac OS X Mavericks</a><a href="/tags/NAS/" style="font-size: 10.00px;">NAS</a><a href="/tags/Open-vSwitch/" style="font-size: 10.00px;">Open vSwitch</a><a href="/tags/OpenFlow/" style="font-size: 16.67px;">OpenFlow</a><a href="/tags/Openwrt/" style="font-size: 10.00px;">Openwrt</a><a href="/tags/Pyinstaller/" style="font-size: 10.00px;">Pyinstaller</a><a href="/tags/Python/" style="font-size: 20.00px;">Python</a><a href="/tags/Raspberry-Pi/" style="font-size: 10.00px;">Raspberry Pi</a><a href="/tags/Ryu/" style="font-size: 13.33px;">Ryu</a><a href="/tags/Ryu-with-GUI/" style="font-size: 10.00px;">Ryu with GUI</a><a href="/tags/SDN/" style="font-size: 16.67px;">SDN</a><a href="/tags/SHT15/" style="font-size: 10.00px;">SHT15</a><a href="/tags/Scapy/" style="font-size: 10.00px;">Scapy</a><a href="/tags/Snort/" style="font-size: 10.00px;">Snort</a><a href="/tags/TL-1043ND/" style="font-size: 10.00px;">TL-1043ND</a><a href="/tags/Tkinter/" style="font-size: 10.00px;">Tkinter</a><a href="/tags/USB-to-Serial/" style="font-size: 10.00px;">USB to Serial</a><a href="/tags/Vim/" style="font-size: 10.00px;">Vim</a><a href="/tags/Vundle/" style="font-size: 10.00px;">Vundle</a><a href="/tags/Yahoo-Finance-API/" style="font-size: 10.00px;">Yahoo Finance API</a><a href="/tags/driver/" style="font-size: 10.00px;">driver</a><a href="/tags/exchange-rate/" style="font-size: 10.00px;">exchange rate</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/office-2011/" style="font-size: 10.00px;">office 2011</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10">October 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09">September 2013</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/08/17/Install-Snort-from-source-on-Ubuntu/">Install Snort from source on Ubuntu</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/11/NTT-Network-Innovation-Laboratories-SDN-Seminar/">NTT 未來網路研究所 SDN 研討會</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/08/My-first-time-using-hexo/">My first time using hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2014/07/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2014/07/28/in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver/">在 Mac OS X Mavericks 上安裝 Aten UC-232A USB to Serial 驅動程式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 John Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/John-Lin" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/about" class="mobile-nav-link">About Me</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'lintontw';
+  
+  var disqus_url = 'http://linton.tw/2013/09/06/pick-photo-utility/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+
+</body>
+</html>
+

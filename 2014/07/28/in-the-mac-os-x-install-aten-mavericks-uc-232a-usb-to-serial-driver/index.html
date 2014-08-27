@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在 Mac OS X Mavericks 上安裝 Aten UC-232A USB to Serial 驅動程式 | John&#39;s Lin Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言
+
+今天在摸索 Centec v350 時候，想要在 Mac 上利用 screen 應用程式，連線 Serial Port 發現一件小問題。
+原本在 Mac 上使用 RS-232 轉 Serial 的裝置應該是一件很輕鬆的的事情，找到本文的主角【Aten UC-232A】對應的驅動程式（官方下載點）利用 screen 程式指定控制終端設備/dev/tty.usbserial 與 Baud ra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 Mac OS X Mavericks 上安裝 Aten UC-232A USB to Serial 驅動程式">
+<meta property="og:url" content="http://linton.tw/2014/07/28/in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver/">
+<meta property="og:site_name" content="John's Lin Blog">
+<meta property="og:description" content="前言
+
+今天在摸索 Centec v350 時候，想要在 Mac 上利用 screen 應用程式，連線 Serial Port 發現一件小問題。
+原本在 Mac 上使用 RS-232 轉 Serial 的裝置應該是一件很輕鬆的的事情，找到本文的主角【Aten UC-232A】對應的驅動程式（官方下載點）利用 screen 程式指定控制終端設備/dev/tty.usbserial 與 Baud ra">
+<meta property="og:image" content="http://user-image.logdown.io/user/3997/blog/4047/post/211786/IXZiuqHQB6NeUs5Jb5Xy_%E8%9E%A2%E5%B9%95%E6%88%AA%E5%9C%96%202014-07-29%2011.11.16.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在 Mac OS X Mavericks 上安裝 Aten UC-232A USB to Serial 驅動程式">
+<meta name="twitter:description" content="前言
+
+今天在摸索 Centec v350 時候，想要在 Mac 上利用 screen 應用程式，連線 Serial Port 發現一件小問題。
+原本在 Mac 上使用 RS-232 轉 Serial 的裝置應該是一件很輕鬆的的事情，找到本文的主角【Aten UC-232A】對應的驅動程式（官方下載點）利用 screen 程式指定控制終端設備/dev/tty.usbserial 與 Baud ra">
+<meta name="twitter:creator" content="@[object Object]">
+
+  
+    <link rel="alternative" href="/atom.xml" title="John&#39;s Lin Blog" type="application/atom+xml">
+  
+  
+  <!--<link rel="icon" href="/favicon.png">-->
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-47712773-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">John&#39;s Lin Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Python / OpenFlow / Hack</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/John-Lin">GitHub</a>
+        
+          <a class="main-nav-link" href="/about">About Me</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://linton.tw"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/07/28/in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver/" class="article-date">
+  <time datetime="2014-07-28T09:11:00.000Z" itemprop="datePublished">7月 28 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在 Mac OS X Mavericks 上安裝 Aten UC-232A USB to Serial 驅動程式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言">前言</h3>
+<hr>
+<p>今天在摸索 Centec v350 時候，想要在 Mac 上利用 <strong>screen</strong> 應用程式，連線 Serial Port 發現一件小問題。</p>
+<p>原本在 Mac 上使用 RS-232 轉 Serial 的裝置應該是一件很輕鬆的的事情，找到本文的主角【Aten UC-232A】對應的驅動程式（<a href="http://www.prolific.com.tw/US/ShowProduct.aspx?p_id=229&amp;pcid=41" target="_blank" rel="external">官方下載點</a>）利用 <strong>screen</strong> 程式指定控制終端設備<code>/dev/tty.usbserial</code> 與 <code>Baud rate</code> 就能利用 COM port 輕鬆連入 Switch 但是，事情似乎不是你我想的那麼簡單…</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>screen /dev/tty.usbserial <span class="number">128000</span></div></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>你會發現，當你裝好驅動程式之後，進去 /dev 卻發現找不到 tty.usbserial 檔案，這樣一來就沒辦法用了…</p>
+<h3 id="發現問題">發現問題</h3>
+<hr>
+<p>原來是 Prolific 官方的 Driver 似乎不斷的更新，而 Aten UC-232A 就是使用 Prolific 的晶片，神奇的是 Vendor ID 和 Product ID 卻不在 Prolific 的 Driver 裡面（猜測是軟體更新太快，硬體太舊變成孤兒了），這會讓你沒辦法正常使用，即使你裝好了 Driver 接上 Aten UC-232A 的 USB to Serial 裝置</p>
+<h3 id="解決方法">解決方法</h3>
+<hr>
+<h4 id="檢查裝置的資訊">檢查裝置的資訊</h4>
+<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/211786/IXZiuqHQB6NeUs5Jb5Xy_%E8%9E%A2%E5%B9%95%E6%88%AA%E5%9C%96%202014-07-29%2011.11.16.png" alt="螢幕截圖 2014-07-29 11.11.16.png"></p>
+<p>接上 UC-232A 後， 打開 Mac 裡的【系統資訊】並檢查裝置的 Vendor ID 和 Product ID 在我的裝置底下看到的是</p>
+<p>(Product ID: 0x2008 and Vendor ID: 0x0557)</p>
+<p>請注意，我們需要把這個換成從 <strong>十六進位</strong> 的數值換成 <strong>十進位</strong> 的並且記下來</p>
+<p>(Product ID: 8200 and Vendor ID: 1367)</p>
+<h4 id="下載安裝驅動程式">下載安裝驅動程式</h4>
+<p>從 <a href="http://www.prolific.com.tw/US/ShowProduct.aspx?p_id=229&amp;pcid=41" target="_blank" rel="external">Prolific 的官方下載點</a> 下載檔案名稱 md_PL2303_MacOSX_10_6up_v1_5_1.zip 解壓縮之後會出現 PL2303_MacOSX_v1.5.1.pkg 安裝後，需要重新啟動電腦。</p>
+<h4 id="修正_UC-232A_Driver_的_plist_檔案">修正 UC-232A Driver 的 plist 檔案</h4>
+<p>修改一下 plist 檔案需要管理者權限</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo vim <span class="regexp">/System/</span>Library<span class="regexp">/Extensions/</span>ProlificUsbSerial.kext<span class="regexp">/Contents/</span>Info.plist</div></pre></td></tr></table></figure>
+
+<p>可以利用搜尋找到 <code>&lt;key&gt;IOKitPersonalities&lt;/key&gt;</code> 這行下面大概會是像以下這樣</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">key</span>&gt;</span>067B_2303<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">dict</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>CFBundleIdentifier<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">string</span>&gt;</span>com.prolific.driver.PL2303<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>IOClass<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">string</span>&gt;</span>com_prolific_driver_PL2303<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>IOProviderClass<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">string</span>&gt;</span>IOUSBInterface<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>bConfigurationValue<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>1<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>bInterfaceNumber<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>0<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>idProduct<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>8963<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>idVendor<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>1659<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">dict</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>姑且先稱上面的裝置設定檔叫做 <strong>一個區塊</strong> 吧！你大概可以看到包含我剛剛上面所貼的總共有 <strong>兩個區塊</strong>，</p>
+<p>我們需要複製 <strong>其中一個區塊</strong> 作為參考的範例，並且把剛剛第一步所看到的 <strong>Vendor ID</strong> 和 <strong>Product ID</strong> 修改複製後的範例，後貼在第二個區塊的後面，實際做法只需要更改三個地方就是 <strong>idProduct</strong> 和 <strong>idVendor</strong> 把剛剛記下來的 <strong>Vendor ID</strong> 和 <strong>Product ID</strong> 的十進位值填入，另外就是 \<key> 標簽裡面用 0557_2008 替代</key></p>
+<p>完成後大概如下面的樣子，你會擁有三個區塊</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">key</span>&gt;</span>067B_2303<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">dict</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>CFBundleIdentifier<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">string</span>&gt;</span>com.prolific.driver.PL2303<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>IOClass<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">string</span>&gt;</span>com_prolific_driver_PL2303<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>IOProviderClass<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">string</span>&gt;</span>IOUSBInterface<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>bConfigurationValue<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>1<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>bInterfaceNumber<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>0<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>idProduct<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>8963<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>idVendor<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>1659<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">dict</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">key</span>&gt;</span>067B_2304<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">dict</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>CFBundleIdentifier<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">string</span>&gt;</span>com.prolific.driver.PL2303<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>IOClass<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">string</span>&gt;</span>com_prolific_driver_PL2303<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>IOProviderClass<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">string</span>&gt;</span>IOUSBInterface<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>bConfigurationValue<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>1<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>bInterfaceNumber<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>0<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>idProduct<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>8964<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>idVendor<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>1659<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">dict</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">key</span>&gt;</span>0557_2008<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">dict</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>CFBundleIdentifier<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">string</span>&gt;</span>com.prolific.driver.PL2303<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>IOClass<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">string</span>&gt;</span>com_prolific_driver_PL2303<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>IOProviderClass<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">string</span>&gt;</span>IOUSBInterface<span class="tag">&lt;/<span class="title">string</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>bConfigurationValue<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>1<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>bInterfaceNumber<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>0<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>idProduct<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>8200<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">key</span>&gt;</span>idVendor<span class="tag">&lt;/<span class="title">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="title">integer</span>&gt;</span>1367<span class="tag">&lt;/<span class="title">integer</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="title">dict</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<h4 id="測試_Driver">測試 Driver</h4>
+<p>執行下面的指令，你應該不會得到錯誤訊息。一旦成功後，你應該可以看到並且可以使用 <code>/dev/tty.usbserial</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo kextload <span class="regexp">/System/</span>Library<span class="regexp">/Extensions/</span>ProlificUsbSerial.kext</div></pre></td></tr></table></figure>
+
+<h4 id="測試_Driver_的自動載入">測試 Driver 的自動載入</h4>
+<p>重啟系統，接上 UC-232A 應該會自動載入，如果沒有順利的自動載入可以執行以下指令</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">sudo</span> touch /System/Library/Extensions</div></pre></td></tr></table></figure>
+
+<p>再回到上一個步驟，【測試 Driver】試試應該可以成功。</p>
+<h4 id="參考資料">參考資料</h4>
+<ul>
+<li><a href="http://blog.unfed.org/2013/10/using-aten-uc-232a-usb-to-serial.html" target="_blank" rel="external">Using Aten UC-232A USB to Serial converter on Mac OS X Mavericks</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://linton.tw/2014/07/28/in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver/" data-id="i7d6hy9e02rr1i9q" class="article-share-link">Share</a>
+      
+        <a href="http://linton.tw/2014/07/28/in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Aten-UC-232A/">Aten UC-232A</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac-OS-X-Mavericks/">Mac OS X Mavericks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/USB-to-Serial/">USB to Serial</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/driver/">driver</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/07/29/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/07/06/beijing-college-student-it-camp-university-of-posts-and-telecommunications/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"> 2014年京台大學生IT交流營【北京郵電大學】</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Amazon-EC2/" style="font-size: 10.00px;">Amazon EC2</a><a href="/tags/Aten-UC-232A/" style="font-size: 10.00px;">Aten UC-232A</a><a href="/tags/BUPT/" style="font-size: 10.00px;">BUPT</a><a href="/tags/Computer-Network/" style="font-size: 10.00px;">Computer Network</a><a href="/tags/Controller/" style="font-size: 10.00px;">Controller</a><a href="/tags/Flask/" style="font-size: 10.00px;">Flask</a><a href="/tags/Hexo/" style="font-size: 10.00px;">Hexo</a><a href="/tags/Lagopus/" style="font-size: 10.00px;">Lagopus</a><a href="/tags/Linux-Mint/" style="font-size: 10.00px;">Linux Mint</a><a href="/tags/Mac-OS-X-Mavericks/" style="font-size: 10.00px;">Mac OS X Mavericks</a><a href="/tags/NAS/" style="font-size: 10.00px;">NAS</a><a href="/tags/Open-vSwitch/" style="font-size: 10.00px;">Open vSwitch</a><a href="/tags/OpenFlow/" style="font-size: 16.67px;">OpenFlow</a><a href="/tags/Openwrt/" style="font-size: 10.00px;">Openwrt</a><a href="/tags/Pyinstaller/" style="font-size: 10.00px;">Pyinstaller</a><a href="/tags/Python/" style="font-size: 20.00px;">Python</a><a href="/tags/Raspberry-Pi/" style="font-size: 10.00px;">Raspberry Pi</a><a href="/tags/Ryu/" style="font-size: 13.33px;">Ryu</a><a href="/tags/Ryu-with-GUI/" style="font-size: 10.00px;">Ryu with GUI</a><a href="/tags/SDN/" style="font-size: 16.67px;">SDN</a><a href="/tags/SHT15/" style="font-size: 10.00px;">SHT15</a><a href="/tags/Scapy/" style="font-size: 10.00px;">Scapy</a><a href="/tags/Snort/" style="font-size: 10.00px;">Snort</a><a href="/tags/TL-1043ND/" style="font-size: 10.00px;">TL-1043ND</a><a href="/tags/Tkinter/" style="font-size: 10.00px;">Tkinter</a><a href="/tags/USB-to-Serial/" style="font-size: 10.00px;">USB to Serial</a><a href="/tags/Vim/" style="font-size: 10.00px;">Vim</a><a href="/tags/Vundle/" style="font-size: 10.00px;">Vundle</a><a href="/tags/Yahoo-Finance-API/" style="font-size: 10.00px;">Yahoo Finance API</a><a href="/tags/driver/" style="font-size: 10.00px;">driver</a><a href="/tags/exchange-rate/" style="font-size: 10.00px;">exchange rate</a><a href="/tags/mac/" style="font-size: 10.00px;">mac</a><a href="/tags/office-2011/" style="font-size: 10.00px;">office 2011</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07">July 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05">May 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03">March 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02">February 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01">January 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12">December 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11">November 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10">October 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09">September 2013</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/08/17/Install-Snort-from-source-on-Ubuntu/">Install Snort from source on Ubuntu</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/11/NTT-Network-Innovation-Laboratories-SDN-Seminar/">NTT 未來網路研究所 SDN 研討會</a>
+          </li>
+        
+          <li>
+            <a href="/2014/08/08/My-first-time-using-hexo/">My first time using hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2014/07/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2014/07/28/in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver/">在 Mac OS X Mavericks 上安裝 Aten UC-232A USB to Serial 驅動程式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 John Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/John-Lin" class="mobile-nav-link">GitHub</a>
+  
+    <a href="/about" class="mobile-nav-link">About Me</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'lintontw';
+  
+  var disqus_url = 'http://linton.tw/2014/07/28/in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+
+</body>
+</html>
+
