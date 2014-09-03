@@ -130,7 +130,7 @@
 <p>後來的改版，將 Snort 跟 Ryu 分開機器後的架構圖：</p>
 <p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/221103/Gok6IiNXQpGTuHx6r7an_workflow02.png" alt="workflow02.png"></p>
 <p>以上這兩種模式，我都有實作進去 Ryu ，由應用程式開發者自己決定要選擇哪一個模式，只要記得把 Configure 設好就能選擇你要使用哪一種模式。</p>
-<p>詳細的文件資料可以參考：<a href="http://ryu.readthedocs.org/en/latest/snort_integrate.html?highlight=snort" target="_blank" rel="external">Snort Integration</a> 或是 ryu source code 目錄底下的 <code>ryu/bin/snort_integrate.rst</code></p>
+<p>詳細的文件資料可以參考：<a href="http://ryu.readthedocs.org/en/latest/snort_integrate.html" target="_blank" rel="external">Snort Integration</a> 或是 ryu source code 目錄底下的 <code>ryu/doc/snort_integrate.rst</code></p>
 <h3 id="Simple_switch_with_snort">Simple switch with snort</h3>
 <hr>
 <p>為了怕大家不太熟悉怎麼樣用這個 lib 就在 sample app 裡面加入了一隻簡單的範例程式<code>simple_switch_snort.py</code> ，這個程式除了可以做 L2 Switch 還可以把封包 mirror 給 Snort 。當 Ryu 收到 Alert message 的時候就把 Alert message 顯示出來，當然包括攻擊者的 5-Tuple 有了這些資訊，我們就能在 Controller 那端 Block 掉惡意的來源！</p>
@@ -141,7 +141,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/" data-id="du5ykq6lrkqbd2tx" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/" data-id="b27qqqd74sq617ed" class="article-share-link">Share</a>
       
         <a href="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/#disqus_thread" class="article-comment-link">Comments</a>
       
