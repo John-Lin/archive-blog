@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Python / OpenFlow / Hack]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://linton.tw/"/>
-  <updated>2014-09-04T05:34:38.844Z</updated>
+  <updated>2014-09-04T07:10:32.572Z</updated>
   <id>http://linton.tw/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/"/>
     <id>http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/</id>
     <published>2014-09-02T17:03:34.000Z</published>
-    <updated>2014-09-04T05:34:16.000Z</updated>
+    <updated>2014-09-04T07:10:18.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/221103/QPs7nl8iTnS45kvEo5jz_snort_ryu.png" alt="snort_ryu.png"></p>
 <p>最近在 Ryu contribute 一些 <a href="https://github.com/osrg/ryu/commit/bbb7724423d79532e10450e1a250fb46e5215416" target="_blank" rel="external">patch</a> 終於加進去官方的 Project 了！<br>特地寫這篇稍微介紹一下 Snort Integration，也順便分享一下在 Ryu 官方本身是不希望貢獻者使用 Pull Request 的情況下，到底要怎麼對 Ryu project 做出你的貢獻呢？</p>
 <a id="more"></a>
@@ -36,11 +36,11 @@
 <p>這個大改版讓這些舊的程式都沒法再使用，所以我就跳下去看 Eventlet 來改他舊的程式，好讓他可以支援目前的 Eventlet。這時候新的Snort Integration就誕生啦！</p>
 <p>回到正題，剛剛有提到 Snort 在發現遭受攻擊的時候，會提出警告訊息（Alert message）你可以選擇將這些訊息記錄在 log 檔、 console 上顯示或是把訊息輸出到 Unix Domain Socket 上（它是一個 client）。那我就參照之前就的那份 source code 去做，在 Ryu 上開一個 Unix Domain Socket的Server 這樣就能聽到 Snort 的警告訊息，最後在把它寫成一個 Event 讓它可以在 Application 上透過寫 event handler 的方式去把 alert message 的資訊顯示出來。</p>
 <p>那我們來看一下，在同一檯機器上的時候 Snort 跟 Ryu 的架構圖：</p>
-<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/221103/vYNtiXONRE2fCDfUwuh0_workflow01.png" alt="workflow01.png"></p>
+<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/221103/fm8tvM7ESQiNz8ivn4Kw_workflow01.png" alt="workflow01.png"></p>
 <p>最終是完成了，但是人總是貪心的，或許我們能在上面再多做一些 feature?</p>
 <p>就有人說啦，把 Snort 跟 Ryu 跑在同一檯機器上， Snort 需要拆解網路封包去判斷是否俱有惡意行為，那麼吃效能會影響 Controller 的。我就在思考要把 Snort 跟 Ryu 拆開的可行辦法，最後找出一個解決方案，在不需要動 Snort 的 source code 之下，我們讓 Snort 那檯機器多跑一隻程式可以接 Unix Domain Socket 的資料再把他往 Network Socket 打出去就能跟 Ryu 接上，所以我又在 Ryu 那邊加入了一個開啓 Network socket Server 這就是讓我們可以把 Snort 跟 Ryu 分開中間的橋樑。</p>
 <p>後來的改版，將 Snort 跟 Ryu 分開機器後的架構圖：</p>
-<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/221103/Gok6IiNXQpGTuHx6r7an_workflow02.png" alt="workflow02.png"></p>
+<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/221103/YEqEJWpTjavTmzT176AF_workflow02.png" alt="workflow02.png"></p>
 <p>以上這兩種模式，我都有實作進去 Ryu ，由應用程式開發者自己決定要選擇哪一個模式，只要記得把 Configure 設好就能選擇你要使用哪一種模式。</p>
 <p>詳細的文件資料可以參考：<a href="http://ryu.readthedocs.org/en/latest/snort_integrate.html" target="_blank" rel="external">Snort Integration</a> 或是 ryu source code 目錄底下的 <code>ryu/doc/snort_integrate.rst</code></p>
 <h3 id="Simple_switch_with_snort">Simple switch with snort</h3>
@@ -660,7 +660,7 @@
 <h3 id="End…">End…</h3>
 <hr>
 <p>若安裝過程還是有問題，可以寄信給我或是在下面留言與我討論 =)</p>
-<p>十分歡迎有在研究 SDN 的朋友一起討論!!<br>Email Address : <a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#x6c;&#x69;&#110;&#116;&#x6f;&#110;&#x40;&#x69;&#105;&#x69;&#46;&#x6f;&#x72;&#103;&#x2e;&#x74;&#x77;">&#x6c;&#x69;&#110;&#116;&#x6f;&#110;&#x40;&#x69;&#105;&#x69;&#46;&#x6f;&#x72;&#103;&#x2e;&#x74;&#x77;</a>  ;  <a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#58;&#108;&#105;&#110;&#116;&#111;&#x6e;&#46;&#116;&#119;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#x6f;&#x6d;">&#108;&#105;&#110;&#116;&#111;&#x6e;&#46;&#116;&#119;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#x6f;&#x6d;</a></p>
+<p>十分歡迎有在研究 SDN 的朋友一起討論!!<br>Email Address : <a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x6c;&#x69;&#x6e;&#x74;&#111;&#x6e;&#64;&#105;&#x69;&#105;&#46;&#111;&#x72;&#x67;&#46;&#x74;&#119;">&#x6c;&#x69;&#x6e;&#x74;&#111;&#x6e;&#64;&#105;&#x69;&#105;&#46;&#111;&#x72;&#x67;&#46;&#x74;&#119;</a>  ;  <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#108;&#x69;&#x6e;&#x74;&#x6f;&#110;&#x2e;&#x74;&#119;&#x40;&#x67;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#108;&#x69;&#x6e;&#x74;&#x6f;&#110;&#x2e;&#x74;&#119;&#x40;&#x67;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;</a></p>
 ]]></content>
     <summary type="html"><![CDATA[<h2 id="Continue…">Continue…</h2>
 <hr>
@@ -868,7 +868,7 @@
 
 <hr>
 <p>若安裝過程還是有問題，可以寄信給我或是在下面留言與我討論 =)</p>
-<p>十分歡迎有在研究 SDN 的朋友一起討論!!<br>Email Address : <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#111;&#58;&#108;&#105;&#110;&#116;&#111;&#x6e;&#64;&#105;&#x69;&#x69;&#x2e;&#111;&#114;&#x67;&#x2e;&#x74;&#119;">&#108;&#105;&#110;&#116;&#111;&#x6e;&#64;&#105;&#x69;&#x69;&#x2e;&#111;&#114;&#x67;&#x2e;&#x74;&#119;</a>  ;  <a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#x69;&#114;&#x65;&#x72;&#105;&#51;&#51;&#57;&#64;&#103;&#109;&#97;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#x69;&#114;&#x65;&#x72;&#105;&#51;&#51;&#57;&#64;&#103;&#109;&#97;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a></p>
+<p>十分歡迎有在研究 SDN 的朋友一起討論!!<br>Email Address : <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#x6c;&#x69;&#x6e;&#x74;&#111;&#x6e;&#64;&#x69;&#x69;&#105;&#x2e;&#111;&#114;&#103;&#46;&#116;&#119;">&#x6c;&#x69;&#x6e;&#x74;&#111;&#x6e;&#64;&#x69;&#x69;&#105;&#x2e;&#111;&#114;&#103;&#46;&#116;&#119;</a>  ;  <a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#58;&#105;&#x72;&#x65;&#x72;&#105;&#51;&#x33;&#x39;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#x63;&#111;&#x6d;">&#105;&#x72;&#x65;&#x72;&#105;&#51;&#x33;&#x39;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#x63;&#111;&#x6d;</a></p>
 ]]></content>
     <summary type="html"><![CDATA[<p>在安裝 Ryu 的過程中並沒有像官方網站所說的那麼順利，踩到一些莫名的小地雷在這邊做一下筆記。</p>
 <h3 id="[更新_2014/02/15]_這是_Ryu_3-5_時做的筆記，目前已經更新為_Ryu_3-6_請參考[最新版的安裝方法]!">[更新 2014/02/15] 這是 Ryu 3.5 時做的筆記，目前已經更新為 Ryu 3.6 請參考[最新版的安裝方法]!</h3>

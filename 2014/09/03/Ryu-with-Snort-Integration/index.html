@@ -12,8 +12,8 @@
 <meta property="og:site_name" content="John's Lin Blog">
 <meta property="og:description" content="最近在 Ryu contribute 一些 patch 終於加進去官方的 Project 了！特地寫這篇稍微介紹一下 Snort Integration，也順便分享一下在 Ryu 官方本身是不希望貢獻者使用 Pull Request 的情況下，到底要怎麼對 Ryu project 做出你的貢獻呢？">
 <meta property="og:image" content="http://user-image.logdown.io/user/3997/blog/4047/post/221103/QPs7nl8iTnS45kvEo5jz_snort_ryu.png">
-<meta property="og:image" content="http://user-image.logdown.io/user/3997/blog/4047/post/221103/vYNtiXONRE2fCDfUwuh0_workflow01.png">
-<meta property="og:image" content="http://user-image.logdown.io/user/3997/blog/4047/post/221103/Gok6IiNXQpGTuHx6r7an_workflow02.png">
+<meta property="og:image" content="http://user-image.logdown.io/user/3997/blog/4047/post/221103/fm8tvM7ESQiNz8ivn4Kw_workflow01.png">
+<meta property="og:image" content="http://user-image.logdown.io/user/3997/blog/4047/post/221103/YEqEJWpTjavTmzT176AF_workflow02.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ryu with Snort Integration">
 <meta name="twitter:description" content="最近在 Ryu contribute 一些 patch 終於加進去官方的 Project 了！特地寫這篇稍微介紹一下 Snort Integration，也順便分享一下在 Ryu 官方本身是不希望貢獻者使用 Pull Request 的情況下，到底要怎麼對 Ryu project 做出你的貢獻呢？">
@@ -124,11 +124,11 @@
 <p>這個大改版讓這些舊的程式都沒法再使用，所以我就跳下去看 Eventlet 來改他舊的程式，好讓他可以支援目前的 Eventlet。這時候新的Snort Integration就誕生啦！</p>
 <p>回到正題，剛剛有提到 Snort 在發現遭受攻擊的時候，會提出警告訊息（Alert message）你可以選擇將這些訊息記錄在 log 檔、 console 上顯示或是把訊息輸出到 Unix Domain Socket 上（它是一個 client）。那我就參照之前就的那份 source code 去做，在 Ryu 上開一個 Unix Domain Socket的Server 這樣就能聽到 Snort 的警告訊息，最後在把它寫成一個 Event 讓它可以在 Application 上透過寫 event handler 的方式去把 alert message 的資訊顯示出來。</p>
 <p>那我們來看一下，在同一檯機器上的時候 Snort 跟 Ryu 的架構圖：</p>
-<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/221103/vYNtiXONRE2fCDfUwuh0_workflow01.png" alt="workflow01.png"></p>
+<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/221103/fm8tvM7ESQiNz8ivn4Kw_workflow01.png" alt="workflow01.png"></p>
 <p>最終是完成了，但是人總是貪心的，或許我們能在上面再多做一些 feature?</p>
 <p>就有人說啦，把 Snort 跟 Ryu 跑在同一檯機器上， Snort 需要拆解網路封包去判斷是否俱有惡意行為，那麼吃效能會影響 Controller 的。我就在思考要把 Snort 跟 Ryu 拆開的可行辦法，最後找出一個解決方案，在不需要動 Snort 的 source code 之下，我們讓 Snort 那檯機器多跑一隻程式可以接 Unix Domain Socket 的資料再把他往 Network Socket 打出去就能跟 Ryu 接上，所以我又在 Ryu 那邊加入了一個開啓 Network socket Server 這就是讓我們可以把 Snort 跟 Ryu 分開中間的橋樑。</p>
 <p>後來的改版，將 Snort 跟 Ryu 分開機器後的架構圖：</p>
-<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/221103/Gok6IiNXQpGTuHx6r7an_workflow02.png" alt="workflow02.png"></p>
+<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/221103/YEqEJWpTjavTmzT176AF_workflow02.png" alt="workflow02.png"></p>
 <p>以上這兩種模式，我都有實作進去 Ryu ，由應用程式開發者自己決定要選擇哪一個模式，只要記得把 Configure 設好就能選擇你要使用哪一種模式。</p>
 <p>詳細的文件資料可以參考：<a href="http://ryu.readthedocs.org/en/latest/snort_integrate.html" target="_blank" rel="external">Snort Integration</a> 或是 ryu source code 目錄底下的 <code>ryu/doc/snort_integrate.rst</code></p>
 <h3 id="Simple_switch_with_snort">Simple switch with snort</h3>
@@ -141,7 +141,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/" data-id="u5z6kqv07yq4fvvn" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/" data-id="o9au35x07yk19wzy" class="article-share-link">Share</a>
       
         <a href="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/#disqus_thread" class="article-comment-link">Comments</a>
       
