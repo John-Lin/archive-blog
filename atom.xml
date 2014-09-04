@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Python / OpenFlow / Hack]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://linton.tw/"/>
-  <updated>2014-09-04T07:10:32.572Z</updated>
+  <updated>2014-09-04T17:50:06.754Z</updated>
   <id>http://linton.tw/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/"/>
     <id>http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/</id>
     <published>2014-09-02T17:03:34.000Z</published>
-    <updated>2014-09-04T07:10:18.000Z</updated>
+    <updated>2014-09-04T17:49:59.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/221103/QPs7nl8iTnS45kvEo5jz_snort_ryu.png" alt="snort_ryu.png"></p>
 <p>最近在 Ryu contribute 一些 <a href="https://github.com/osrg/ryu/commit/bbb7724423d79532e10450e1a250fb46e5215416" target="_blank" rel="external">patch</a> 終於加進去官方的 Project 了！<br>特地寫這篇稍微介紹一下 Snort Integration，也順便分享一下在 Ryu 官方本身是不希望貢獻者使用 Pull Request 的情況下，到底要怎麼對 Ryu project 做出你的貢獻呢？</p>
 <a id="more"></a>
@@ -48,7 +48,27 @@
 <p>為了怕大家不太熟悉怎麼樣用這個 lib 就在 sample app 裡面加入了一隻簡單的範例程式<code>simple_switch_snort.py</code> ，這個程式除了可以做 L2 Switch 還可以把封包 mirror 給 Snort 。當 Ryu 收到 Alert message 的時候就把 Alert message 顯示出來，當然包括攻擊者的 5-Tuple 有了這些資訊，我們就能在 Controller 那端 Block 掉惡意的來源！</p>
 <h3 id="About_Contribution">About Contribution</h3>
 <hr>
-<p>Not yet</p>
+<p>會寫這段的原因是一開始也不懂得怎麼加 patch 後來看到 <a href="http://osrg.github.io/ryu-book/en/html/" target="_blank" rel="external">Ryubook</a> 上有記錄，就稍微記錄一下讓想要加 patch 的朋友可以做一個參考。</p>
+<p>Ryu 雖然把 Source Code 放在 GitHub 但不太一樣的是他不能做 Pull Request 他希望所有開發者能夠遞交 Patch 到他們的 Mailing List 上，這種方式跟 Linux kernel 的開發方式一樣，遞交 patch 需要來一個 Signed-off 然後他們如果 Accept 的話，就能夠收錄進官方的 Ryu Project.</p>
+<p>我們可以使用 Git 來產生 Patch 然後對方接到這個 Patch 後，覺得滿意的話，他可以透過 git am 指令把 patch merge進去，可以參考以下步驟遞交 Patch：</p>
+<ol>
+<li>當你做完 source code 的變更後，我們通常會 Commit 寫一段你所做的變更的歷史記錄。</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">add</span> sample.<span class="keyword">py</span></div><div class="line">$ git commit -<span class="keyword">m</span> <span class="string">"Add sample application"</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>接下來利用 Git 產生 Patch, 別忘了 <code>-s</code> 是簽名哦！他會去 <code>.gitconfig</code> 拿你的名字跟 email 放在 patch 的後面</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git format-patch origin <span class="operator">-s</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>寄出你的 Patch 到 Mailing List 上，你可以不加 <code>-to</code> Git 會問你要寄給誰？ </li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>git send-email <span class="number">0001</span>-sample.patch -to ryu-devel<span class="variable">@lists</span>.sourceforge.net</div></pre></td></tr></table></figure>
+
+<ol>
+<li>靜待回音囉！</li>
+</ol>
 ]]></content>
     <summary type="html"><![CDATA[<p><img src="http://user-image.logdown.io/user/3997/blog/4047/post/221103/QPs7nl8iTnS45kvEo5jz_snort_ryu.png" alt="snort_ryu.png"></p>
 <p>最近在 Ryu contribute 一些 <a href="https://github.com/osrg/ryu/commit/bbb7724423d79532e10450e1a250fb46e5215416" target="_blank" rel="external">patch</a> 終於加進去官方的 Project 了！<br>特地寫這篇稍微介紹一下 Snort Integration，也順便分享一下在 Ryu 官方本身是不希望貢獻者使用 Pull Request 的情況下，到底要怎麼對 Ryu project 做出你的貢獻呢？</p>
@@ -660,7 +680,7 @@
 <h3 id="End…">End…</h3>
 <hr>
 <p>若安裝過程還是有問題，可以寄信給我或是在下面留言與我討論 =)</p>
-<p>十分歡迎有在研究 SDN 的朋友一起討論!!<br>Email Address : <a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x6c;&#x69;&#x6e;&#x74;&#111;&#x6e;&#64;&#105;&#x69;&#105;&#46;&#111;&#x72;&#x67;&#46;&#x74;&#119;">&#x6c;&#x69;&#x6e;&#x74;&#111;&#x6e;&#64;&#105;&#x69;&#105;&#46;&#111;&#x72;&#x67;&#46;&#x74;&#119;</a>  ;  <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#x3a;&#108;&#x69;&#x6e;&#x74;&#x6f;&#110;&#x2e;&#x74;&#119;&#x40;&#x67;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#108;&#x69;&#x6e;&#x74;&#x6f;&#110;&#x2e;&#x74;&#119;&#x40;&#x67;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;</a></p>
+<p>十分歡迎有在研究 SDN 的朋友一起討論!!<br>Email Address : <a href="&#x6d;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#108;&#x69;&#110;&#x74;&#x6f;&#x6e;&#64;&#105;&#x69;&#105;&#x2e;&#111;&#x72;&#x67;&#x2e;&#116;&#x77;">&#108;&#x69;&#110;&#x74;&#x6f;&#x6e;&#64;&#105;&#x69;&#105;&#x2e;&#111;&#x72;&#x67;&#x2e;&#116;&#x77;</a>  ;  <a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#108;&#105;&#110;&#116;&#x6f;&#x6e;&#46;&#116;&#119;&#x40;&#x67;&#x6d;&#97;&#105;&#x6c;&#46;&#x63;&#x6f;&#109;">&#108;&#105;&#110;&#116;&#x6f;&#x6e;&#46;&#116;&#119;&#x40;&#x67;&#x6d;&#97;&#105;&#x6c;&#46;&#x63;&#x6f;&#109;</a></p>
 ]]></content>
     <summary type="html"><![CDATA[<h2 id="Continue…">Continue…</h2>
 <hr>
@@ -868,7 +888,7 @@
 
 <hr>
 <p>若安裝過程還是有問題，可以寄信給我或是在下面留言與我討論 =)</p>
-<p>十分歡迎有在研究 SDN 的朋友一起討論!!<br>Email Address : <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#x6c;&#x69;&#x6e;&#x74;&#111;&#x6e;&#64;&#x69;&#x69;&#105;&#x2e;&#111;&#114;&#103;&#46;&#116;&#119;">&#x6c;&#x69;&#x6e;&#x74;&#111;&#x6e;&#64;&#x69;&#x69;&#105;&#x2e;&#111;&#114;&#103;&#46;&#116;&#119;</a>  ;  <a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#58;&#105;&#x72;&#x65;&#x72;&#105;&#51;&#x33;&#x39;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#x63;&#111;&#x6d;">&#105;&#x72;&#x65;&#x72;&#105;&#51;&#x33;&#x39;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#x63;&#111;&#x6d;</a></p>
+<p>十分歡迎有在研究 SDN 的朋友一起討論!!<br>Email Address : <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#x6c;&#105;&#110;&#116;&#x6f;&#110;&#x40;&#x69;&#x69;&#x69;&#x2e;&#111;&#114;&#103;&#x2e;&#x74;&#x77;">&#x6c;&#105;&#110;&#116;&#x6f;&#110;&#x40;&#x69;&#x69;&#x69;&#x2e;&#111;&#114;&#103;&#x2e;&#x74;&#x77;</a>  ;  <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#x69;&#x72;&#101;&#x72;&#x69;&#51;&#x33;&#x39;&#64;&#x67;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;">&#x69;&#x72;&#101;&#x72;&#x69;&#51;&#x33;&#x39;&#64;&#x67;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;</a></p>
 ]]></content>
     <summary type="html"><![CDATA[<p>在安裝 Ryu 的過程中並沒有像官方網站所說的那麼順利，踩到一些莫名的小地雷在這邊做一下筆記。</p>
 <h3 id="[更新_2014/02/15]_這是_Ryu_3-5_時做的筆記，目前已經更新為_Ryu_3-6_請參考[最新版的安裝方法]!">[更新 2014/02/15] 這是 Ryu 3.5 時做的筆記，目前已經更新為 Ryu 3.6 請參考[最新版的安裝方法]!</h3>

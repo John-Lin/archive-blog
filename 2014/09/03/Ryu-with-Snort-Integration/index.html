@@ -136,12 +136,32 @@
 <p>為了怕大家不太熟悉怎麼樣用這個 lib 就在 sample app 裡面加入了一隻簡單的範例程式<code>simple_switch_snort.py</code> ，這個程式除了可以做 L2 Switch 還可以把封包 mirror 給 Snort 。當 Ryu 收到 Alert message 的時候就把 Alert message 顯示出來，當然包括攻擊者的 5-Tuple 有了這些資訊，我們就能在 Controller 那端 Block 掉惡意的來源！</p>
 <h3 id="About_Contribution">About Contribution</h3>
 <hr>
-<p>Not yet</p>
+<p>會寫這段的原因是一開始也不懂得怎麼加 patch 後來看到 <a href="http://osrg.github.io/ryu-book/en/html/" target="_blank" rel="external">Ryubook</a> 上有記錄，就稍微記錄一下讓想要加 patch 的朋友可以做一個參考。</p>
+<p>Ryu 雖然把 Source Code 放在 GitHub 但不太一樣的是他不能做 Pull Request 他希望所有開發者能夠遞交 Patch 到他們的 Mailing List 上，這種方式跟 Linux kernel 的開發方式一樣，遞交 patch 需要來一個 Signed-off 然後他們如果 Accept 的話，就能夠收錄進官方的 Ryu Project.</p>
+<p>我們可以使用 Git 來產生 Patch 然後對方接到這個 Patch 後，覺得滿意的話，他可以透過 git am 指令把 patch merge進去，可以參考以下步驟遞交 Patch：</p>
+<ol>
+<li>當你做完 source code 的變更後，我們通常會 Commit 寫一段你所做的變更的歷史記錄。</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">add</span> sample.<span class="keyword">py</span></div><div class="line">$ git commit -<span class="keyword">m</span> <span class="string">"Add sample application"</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>接下來利用 Git 產生 Patch, 別忘了 <code>-s</code> 是簽名哦！他會去 <code>.gitconfig</code> 拿你的名字跟 email 放在 patch 的後面</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git format-patch origin <span class="operator">-s</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>寄出你的 Patch 到 Mailing List 上，你可以不加 <code>-to</code> Git 會問你要寄給誰？ </li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>git send-email <span class="number">0001</span>-sample.patch -to ryu-devel<span class="variable">@lists</span>.sourceforge.net</div></pre></td></tr></table></figure>
+
+<ol>
+<li>靜待回音囉！</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/" data-id="o9au35x07yk19wzy" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/" data-id="7yawqqq6b1hf2q91" class="article-share-link">Share</a>
       
         <a href="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/#disqus_thread" class="article-comment-link">Comments</a>
       
