@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Python / OpenFlow / Hack]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://linton.tw/"/>
-  <updated>2015-01-01T17:07:49.118Z</updated>
+  <updated>2015-02-03T15:51:08.201Z</updated>
   <id>http://linton.tw/</id>
   
   <author>
@@ -13,6 +13,18 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Test image post]]></title>
+    <link href="http://linton.tw/2015/02/03/Test-image-post/"/>
+    <id>http://linton.tw/2015/02/03/Test-image-post/</id>
+    <published>2015-02-03T15:50:12.000Z</published>
+    <updated>2015-02-03T15:50:53.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="../img/lollipop.jpg" alt="lollipop"></p>
+]]></content>
+    
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Snort Rules Generator]]></title>
@@ -56,7 +68,7 @@
 <p>分析網路封包與產生 Snort Rules 解封包重組 Payload 用 <a href="https://code.google.com/p/dpkt/" target="_blank" rel="external">Dpkt</a> 判斷惡意或善意連線需要有一個 Knowledge Base 依靠的是 <a href="https://www.virustotal.com/" target="_blank" rel="external">VirusTotal</a> 所提供的 API 這邊我有去申請 Private 的 API 每分鐘能發 300 個 requests 相較於 Public API 每分鐘 4 個 requests 是天差地遠！</p>
 <p>我想徵招興趣的朋友一起來做專案都在 Github 上！</p>
 <p><a href="https://github.com/John-Lin/malware" target="_blank" rel="external">https://github.com/John-Lin/malware</a></p>
-<p>對此專案有興趣，或想加入一起開發的朋友可以來信 <a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#x6c;&#x69;&#x6e;&#116;&#111;&#x6e;&#46;&#116;&#119;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#109;">&#x6c;&#x69;&#x6e;&#116;&#111;&#x6e;&#46;&#116;&#119;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#109;</a></p>
+<p>對此專案有興趣，或想加入一起開發的朋友可以來信 <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#x6c;&#105;&#x6e;&#x74;&#x6f;&#110;&#x2e;&#116;&#x77;&#64;&#103;&#109;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#x6d;">&#x6c;&#105;&#x6e;&#x74;&#x6f;&#110;&#x2e;&#116;&#x77;&#64;&#103;&#109;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#x6d;</a></p>
 <p>目前有幾項功能想要增加：</p>
 <ul>
 <li><p>產生非 HTTP Protocol 的規則 （沒錯！除 UDP 的規則目前尚在開發中， TCP 的 case 我目前只有針對 HTTP Protocol 產生的規則，因為 Windows 防火牆預設都把其他 port 關了，我就錄不到其他 port 的連線！）</p>
@@ -723,7 +735,7 @@
 <h3 id="End…">End…</h3>
 <hr>
 <p>若安裝過程還是有問題，可以寄信給我或是在下面留言與我討論 =)</p>
-<p>十分歡迎有在研究 SDN 的朋友一起討論!!<br>Email Address : <a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#108;&#x69;&#x6e;&#x74;&#111;&#x6e;&#64;&#x69;&#105;&#x69;&#x2e;&#x6f;&#114;&#x67;&#x2e;&#x74;&#119;">&#108;&#x69;&#x6e;&#x74;&#111;&#x6e;&#64;&#x69;&#105;&#x69;&#x2e;&#x6f;&#114;&#x67;&#x2e;&#x74;&#119;</a>  ;  <a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x6c;&#105;&#110;&#116;&#111;&#x6e;&#46;&#116;&#119;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#x6c;&#105;&#110;&#116;&#111;&#x6e;&#46;&#116;&#119;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;</a></p>
+<p>十分歡迎有在研究 SDN 的朋友一起討論!!<br>Email Address : <a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#x6c;&#x69;&#110;&#x74;&#111;&#x6e;&#64;&#105;&#x69;&#105;&#46;&#x6f;&#x72;&#103;&#46;&#116;&#x77;">&#x6c;&#x69;&#110;&#x74;&#111;&#x6e;&#64;&#105;&#x69;&#105;&#46;&#x6f;&#x72;&#103;&#46;&#116;&#x77;</a>  ;  <a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#108;&#105;&#110;&#116;&#111;&#110;&#x2e;&#116;&#x77;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#109;">&#108;&#105;&#110;&#116;&#111;&#110;&#x2e;&#116;&#x77;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#109;</a></p>
 ]]></content>
     <summary type="html"><![CDATA[<h2 id="Continue…">Continue…</h2>
 <hr>
@@ -931,7 +943,7 @@
 
 <hr>
 <p>若安裝過程還是有問題，可以寄信給我或是在下面留言與我討論 =)</p>
-<p>十分歡迎有在研究 SDN 的朋友一起討論!!<br>Email Address : <a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#x6c;&#105;&#x6e;&#116;&#111;&#110;&#x40;&#x69;&#105;&#x69;&#x2e;&#x6f;&#x72;&#103;&#x2e;&#116;&#119;">&#x6c;&#105;&#x6e;&#116;&#111;&#110;&#x40;&#x69;&#105;&#x69;&#x2e;&#x6f;&#x72;&#103;&#x2e;&#116;&#119;</a>  ;  <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x69;&#114;&#x65;&#x72;&#x69;&#x33;&#x33;&#x39;&#x40;&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;">&#x69;&#114;&#x65;&#x72;&#x69;&#x33;&#x33;&#x39;&#x40;&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#99;&#x6f;&#x6d;</a></p>
+<p>十分歡迎有在研究 SDN 的朋友一起討論!!<br>Email Address : <a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#x3a;&#108;&#105;&#110;&#116;&#111;&#x6e;&#64;&#x69;&#105;&#x69;&#x2e;&#111;&#x72;&#103;&#x2e;&#x74;&#119;">&#108;&#105;&#110;&#116;&#111;&#x6e;&#64;&#x69;&#105;&#x69;&#x2e;&#111;&#x72;&#103;&#x2e;&#x74;&#119;</a>  ;  <a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#105;&#x72;&#101;&#114;&#x69;&#51;&#x33;&#x39;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#109;">&#105;&#x72;&#101;&#114;&#x69;&#51;&#x33;&#x39;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#x2e;&#x63;&#111;&#109;</a></p>
 ]]></content>
     <summary type="html"><![CDATA[<p>在安裝 Ryu 的過程中並沒有像官方網站所說的那麼順利，踩到一些莫名的小地雷在這邊做一下筆記。</p>
 <h3 id="[更新_2014/02/15]_這是_Ryu_3-5_時做的筆記，目前已經更新為_Ryu_3-6_請參考[最新版的安裝方法]!">[更新 2014/02/15] 這是 Ryu 3.5 時做的筆記，目前已經更新為 Ryu 3.6 請參考[最新版的安裝方法]!</h3>
@@ -1126,66 +1138,6 @@
 ]]></summary>
     
       <category term="NAS" scheme="http://linton.tw/tags/NAS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Scapy 網路封包分析工具]]></title>
-    <link href="http://linton.tw/2013/10/18/scapy-network-packet-analysis-tool/"/>
-    <id>http://linton.tw/2013/10/18/scapy-network-packet-analysis-tool/</id>
-    <published>2013-10-17T23:04:00.000Z</published>
-    <updated>2014-12-30T01:39:15.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="關於Scapy">關於Scapy</h2>
-<hr>
-<p><a href="http://www.secdev.org/projects/scapy/" target="_blank" rel="external">Scapy</a> 是由 Python 寫出的一款強大、著名的網路封包分析函式，但它不僅僅只是函式而已，它同時也是一個基於 Python 交互式(interactive)的工具程式。目前比較有名跟它類似的工具像是<a href="http://www.wireshark.org/download.html" target="_blank" rel="external">Wireshark</a>，不過因為它可以配合 Python 寫出俱有特殊目的的封包分析方式，所以擁有更多的彈性。</p>
-<a id="more"></a>
-
-
-<h2 id="Linux上安裝Scapy">Linux上安裝Scapy</h2>
-<hr>
-<ul>
-<li>Debian/Ubuntu 平台上</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-<span class="built_in">get</span> install <span class="keyword">python</span>-scapy <span class="keyword">python</span>-pyx <span class="keyword">python</span>-gnuplot</div></pre></td></tr></table></figure>
-
-<ul>
-<li>其他作業系統請看這裡: <a href="http://www.secdev.org/projects/scapy/doc/installation.html#" target="_blank" rel="external">Download and Installation</a></li>
-</ul>
-<h2 id="執行交互式的Scapy">執行交互式的Scapy</h2>
-<hr>
-<figure class="highlight python"><figcaption><span>install</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo scapy</div></pre></td></tr></table></figure>
-
-<p>Scapy shell 會顯示如下:</p>
-<figure class="highlight python"><figcaption><span>Scapy Shell</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">WARNING: No route found for IPv6 destination :: (no default route?)</div><div class="line">Welcome to Scapy (2.2.0)</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
-
-<h2 id="基本用法">基本用法</h2>
-<hr>
-<h3 id="製作封包">製作封包</h3>
-<p>Scapy可以製作封包，指定封包的目的地IP、來源地IP、<a href="http://zh.wikipedia.org/wiki/%E5%AD%98%E6%B4%BB%E6%99%82%E9%96%93" target="_blank" rel="external">TTL</a>，等等資訊。</p>
-<p>進入交互式的Scapy後，可以直接輸入</p>
-<figure class="highlight python"><figcaption><span>Quick Demo </span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="prompt">&gt;&gt;&gt; </span>packet = IP() <span class="comment">#創建一個封包</span></div><div class="line"><span class="prompt">&gt;&gt;&gt; </span>packet.show() <span class="comment">#顯示封包資訊</span></div><div class="line"><span class="comment">###[ IP ]###</span></div><div class="line">  version= <span class="number">4</span></div><div class="line">  ihl= <span class="keyword">None</span></div><div class="line">  tos= <span class="number">0x0</span></div><div class="line">  len= <span class="keyword">None</span></div><div class="line">  id= <span class="number">1</span></div><div class="line">  flags=</div><div class="line">  frag= <span class="number">0</span></div><div class="line">  ttl= <span class="number">64</span></div><div class="line">  proto= ip</div><div class="line">  chksum= <span class="keyword">None</span></div><div class="line">  src= <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></div><div class="line">  dst= <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></div><div class="line">  \options\</div><div class="line"> </div><div class="line"><span class="prompt">&gt;&gt;&gt; </span>packet.src <span class="comment">#輸出封包來源地</span></div><div class="line"><span class="string">'127.0.0.1'</span></div><div class="line"></div><div class="line"><span class="prompt">&gt;&gt;&gt; </span>packet.ttl <span class="comment">#輸出封包的TTL (預設64)</span></div><div class="line"><span class="number">64</span></div><div class="line"></div><div class="line">&gt;&gt;&gt;packet.dst = <span class="string">'192.168.2.1'</span> <span class="comment">#指派封包的目的地</span></div><div class="line">&gt;&gt;&gt;packet.ttl = <span class="number">10</span> <span class="comment">#指派封包的TTL</span></div><div class="line"></div><div class="line">&gt;&gt;&gt;packet</div><div class="line">&lt;IP  ttl=<span class="number">10</span> dst=<span class="number">192.168</span><span class="number">.2</span><span class="number">.1</span> |&gt;</div></pre></td></tr></table></figure>
-
-<h3 id="跨層堆疊">跨層堆疊</h3>
-<p>根據 <strong>OSI</strong>(Open System Interconnection Model) 七層協定，對應到目前實際上常用的 <strong>TCP/IP</strong>如下圖所示：</p>
-<p><img src="https://learningnetwork.cisco.com/servlet/JiveServlet/showImage/2-91877-17070/osi-model.jpg" alt="OSI.png"></p>
-<p><a href="https://learningnetwork.cisco.com/thread/20594" target="_blank" rel="external">圖片摘自</a></p>
-<p>方才介紹 <strong>製作封包</strong> 的方法其實就是在 TCP/IP 上的第二層 <strong>Internet Layer</strong> ，我們可以透過 <code>/</code> 操作子來堆疊第一、三、四層，也就是 <strong>Network Access Layer</strong>, <strong>Transport Layer</strong>, <strong>Application Layer</strong></p>
-<figure class="highlight python"><figcaption><span>Stacking layers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt;IP()/TCP() <span class="comment">#Layer 2/Layer 3</span></div><div class="line">&lt;IP  frag=<span class="number">0</span> proto=tcp |&lt;TCP  |&gt;&gt;</div><div class="line"></div><div class="line">&gt;&gt;&gt;Ether()/IP()/UDP() <span class="comment">#Layer 1/Layer 2/Layer 3</span></div><div class="line">&lt;Ether  type=<span class="number">0x800</span> |&lt;IP  frag=<span class="number">0</span> proto=udp |&lt;UDP  |&gt;&gt;&gt;</div><div class="line"></div><div class="line">&gt;&gt;&gt;IP()/TCP()/<span class="string">"GET / HTTP/1.0\r\n\r\n"</span> <span class="comment">#Layer 2/Layer 3/Layer 4</span></div><div class="line">&lt;IP  frag=<span class="number">0</span> proto=tcp |&lt;TCP  |&lt;Raw  load=<span class="string">'GET / HTTP/1.0\r\n\r\n'</span> |&gt;&gt;&gt;</div></pre></td></tr></table></figure>
-
-<h2 id="小結">小結</h2>
-<hr>
-<p>使用 Scapy 除了可以偽裝別人的 MAC address 或 IP address來發送封包之外，也可以利用內建的 Sniffer 來截取別人的封包，窺探封包裡面的資料，例如某網站沒有用HTTPS加密當使用者輸入完密碼，送出後利用 Sniffer 就可以拿到該密碼。<br>改天會來寫一篇如何利用 Sniffer 截取未加密網站的資料。</p>
-]]></content>
-    <summary type="html"><![CDATA[<h2 id="關於Scapy">關於Scapy</h2>
-<hr>
-<p><a href="http://www.secdev.org/projects/scapy/" target="_blank" rel="external">Scapy</a> 是由 Python 寫出的一款強大、著名的網路封包分析函式，但它不僅僅只是函式而已，它同時也是一個基於 Python 交互式(interactive)的工具程式。目前比較有名跟它類似的工具像是<a href="http://www.wireshark.org/download.html" target="_blank" rel="external">Wireshark</a>，不過因為它可以配合 Python 寫出俱有特殊目的的封包分析方式，所以擁有更多的彈性。</p>
-]]></summary>
-    
-      <category term="Python" scheme="http://linton.tw/tags/Python/"/>
-    
-      <category term="Scapy" scheme="http://linton.tw/tags/Scapy/"/>
-    
-      <category term="Computer Network" scheme="http://linton.tw/tags/Computer-Network/"/>
     
   </entry>
   
