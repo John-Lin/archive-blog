@@ -3,17 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: Mac OS X Mavericks | John&#39;s Lin Blog</title>
+  <title>An install script and guide for Ryu | John&#39;s Lin Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="This blog talks about some OpenFlow technique and hacking in Python.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="John's Lin Blog">
-<meta property="og:url" content="http://linton.tw/tags/Mac-OS-X-Mavericks/">
+  <meta name="description" content="近期收到蠻多信（目前比較忙有些沒辦法一一回覆），大多都是研究生或專題生要做實驗，但是被安裝問題搞得很頭大，這通常都是相依套件的問題，其實問題不難解決。希望大家不要花太多時間在這。
+目前最新版的 Ryu 安裝上如果遇到問題，可以參考使用以下安裝腳本。
+https://github.com/sdnds-tw/ryuInstallHelper
+裡面有提供最完整的安裝教學指南。目前提供 Ubuntu 的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="An install script and guide for Ryu">
+<meta property="og:url" content="http://linton.tw/2015/02/18/An-install-script-and-guide-for-Ryu/">
 <meta property="og:site_name" content="John's Lin Blog">
-<meta property="og:description" content="This blog talks about some OpenFlow technique and hacking in Python.">
+<meta property="og:description" content="近期收到蠻多信（目前比較忙有些沒辦法一一回覆），大多都是研究生或專題生要做實驗，但是被安裝問題搞得很頭大，這通常都是相依套件的問題，其實問題不難解決。希望大家不要花太多時間在這。
+目前最新版的 Ryu 安裝上如果遇到問題，可以參考使用以下安裝腳本。
+https://github.com/sdnds-tw/ryuInstallHelper
+裡面有提供最完整的安裝教學指南。目前提供 Ubuntu 的">
+<meta property="og:image" content="http://i4.minus.com/iYGeioze8zEyS.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="John's Lin Blog">
-<meta name="twitter:description" content="This blog talks about some OpenFlow technique and hacking in Python.">
+<meta name="twitter:title" content="An install script and guide for Ryu">
+<meta name="twitter:description" content="近期收到蠻多信（目前比較忙有些沒辦法一一回覆），大多都是研究生或專題生要做實驗，但是被安裝問題搞得很頭大，這通常都是相依套件的問題，其實問題不難解決。希望大家不要花太多時間在這。
+目前最新版的 Ryu 安裝上如果遇到問題，可以參考使用以下安裝腳本。
+https://github.com/sdnds-tw/ryuInstallHelper
+裡面有提供最完整的安裝教學指南。目前提供 Ubuntu 的">
 <meta name="twitter:creator" content="@[object Object]">
 
   
@@ -85,12 +95,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-An-install-script-and-guide-for-Ryu" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/07/28/in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver/" class="article-date">
-  <time datetime="2014-07-28T09:11:00.000Z" itemprop="datePublished">7月 28 2014</time>
+    <a href="/2015/02/18/An-install-script-and-guide-for-Ryu/" class="article-date">
+  <time datetime="2015-02-17T16:58:05.000Z" itemprop="datePublished">2月 18 2015</time>
 </a>
     
   </div>
@@ -100,8 +108,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/07/28/in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver/">在 Mac OS X Mavericks 上安裝 Aten UC-232A USB to Serial 驅動程式</a>
+    <h1 class="article-title" itemprop="name">
+      An install script and guide for Ryu
     </h1>
   
 
@@ -109,36 +117,51 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="前言">前言</h3>
-<hr>
-<p>今天在摸索 Centec v350 時候，想要在 Mac 上利用 <strong>screen</strong> 應用程式，連線 Serial Port 發現一件小問題。</p>
-<p>原本在 Mac 上使用 RS-232 轉 Serial 的裝置應該是一件很輕鬆的的事情，找到本文的主角【Aten UC-232A】對應的驅動程式（<a href="http://www.prolific.com.tw/US/ShowProduct.aspx?p_id=229&amp;pcid=41" target="_blank" rel="external">官方下載點</a>）利用 <strong>screen</strong> 程式指定控制終端設備<code>/dev/tty.usbserial</code> 與 <code>Baud rate</code> 就能利用 COM port 輕鬆連入 Switch 但是，事情似乎不是你我想的那麼簡單…</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>screen /dev/tty.usbserial <span class="number">128000</span></div></pre></td></tr></table></figure>
+        <p><img src="http://i4.minus.com/iYGeioze8zEyS.png" alt="scripts"></p>
+<p>近期收到蠻多信（目前比較忙有些沒辦法一一回覆），大多都是研究生或專題生要做實驗，但是被安裝問題搞得很頭大，這通常都是相依套件的問題，其實問題不難解決。希望大家不要花太多時間在這。</p>
+<p>目前最新版的 Ryu 安裝上如果遇到問題，可以參考使用以下安裝腳本。</p>
+<p><a href="https://github.com/sdnds-tw/ryuInstallHelper" target="_blank" rel="external">https://github.com/sdnds-tw/ryuInstallHelper</a></p>
+<p>裡面有提供最完整的安裝教學指南。目前提供 <strong>Ubuntu</strong> 的安裝腳本，或是選用 <a href="https://virtualenv.pypa.io/en/latest/" target="_blank" rel="external">Virtualenv</a> 的方法。</p>
+<p>只要下面用兩行指令就可以把 Ryu 裝到好。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ wget http<span class="variable">s:</span>//raw.githubusercontent.<span class="keyword">com</span>/sdnds-tw/ryuInstallHelper/master/ryuInstallHelper.<span class="keyword">sh</span></div><div class="line">$ bash ryuInstallHelper.<span class="keyword">sh</span></div></pre></td></tr></table></figure>
 
+<h4 id="Mac_OSX">Mac OSX</h4>
+<p>另外想要在 <strong>Mac OSX</strong> 上做 SDN 實驗的也有提供安裝指南可以參考一下，在 <strong>Mac OSX</strong> 上建議使用 Virtualenv 的方式安裝。</p>
+<p>Ryu install guide on Mac OSX: <a href="https://github.com/sdnds-tw/ryuInstallHelper/tree/master/macosx" target="_blank" rel="external">https://github.com/sdnds-tw/ryuInstallHelper/tree/master/macosx</a></p>
 
-        
-          <p class="article-more-link">
-            <a href="/2014/07/28/in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver/#more">Read More</a>
-          </p>
-        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2014/07/28/in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver/" data-id="morqihrl1ammtqn8" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2015/02/18/An-install-script-and-guide-for-Ryu/" data-id="24acdeojgkmd2rln" class="article-share-link">Share</a>
       
-        <a href="http://linton.tw/2014/07/28/in-the-mac-os-x-install-aten-mavericks-uc-232a-usb-to-serial-driver/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://linton.tw/2015/02/18/An-install-script-and-guide-for-Ryu/#disqus_thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Aten-UC-232A/">Aten UC-232A</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac-OS-X-Mavericks/">Mac OS X Mavericks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/USB-to-Serial/">USB to Serial</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/driver/">driver</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenFlow/">OpenFlow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ryu/">Ryu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SDN/">SDN</a></li></ul>
 
     </footer>
   </div>
   
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/01/26/saving-captured-packets-in-ryu-controller/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Saving captured packets in Ryu controller</div>
+    </a>
+  
+</nav>
+
+  
 </article>
 
 
-  
-  
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
 </section>
         
           <aside id="sidebar">
@@ -224,11 +247,13 @@
 <script>
   var disqus_shortname = 'lintontw';
   
+  var disqus_url = 'http://linton.tw/2015/02/18/An-install-script-and-guide-for-Ryu/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//go.disqus.com/count.js';
+    dsq.src = '//go.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
