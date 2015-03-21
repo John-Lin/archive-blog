@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Custom Packet creation using Ryu and Scapy | John&#39;s Lin Blog</title>
+  <title>Custom packet creation using Ryu and Scapy | John&#39;s Lin Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="這次分享一下如何在 Ryu Controller 下製造一個封包傳給 OpenFlow Switch (device)
-應用情境: 假設你在 Controller 收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用 OpenFlow 的 Packet-Out message 傳給 Switch
+  <meta name="description" content="這次分享一下如何在 Ryu Controller 下製造一個客製化封包傳給 OpenFlow Switch (device)
+應用情境：假設你在 Controller 收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用 OpenFlow 的 Packet-Out message 傳給 Switch
 這裏有兩種方法，分別是利用 Ryu 與 Scapy 皆可以產生客製化封包，以下提供你參考">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Custom Packet creation using Ryu and Scapy">
+<meta property="og:title" content="Custom packet creation using Ryu and Scapy">
 <meta property="og:url" content="http://linton.tw/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/">
 <meta property="og:site_name" content="John's Lin Blog">
-<meta property="og:description" content="這次分享一下如何在 Ryu Controller 下製造一個封包傳給 OpenFlow Switch (device)
-應用情境: 假設你在 Controller 收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用 OpenFlow 的 Packet-Out message 傳給 Switch
+<meta property="og:description" content="這次分享一下如何在 Ryu Controller 下製造一個客製化封包傳給 OpenFlow Switch (device)
+應用情境：假設你在 Controller 收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用 OpenFlow 的 Packet-Out message 傳給 Switch
 這裏有兩種方法，分別是利用 Ryu 與 Scapy 皆可以產生客製化封包，以下提供你參考">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Custom Packet creation using Ryu and Scapy">
-<meta name="twitter:description" content="這次分享一下如何在 Ryu Controller 下製造一個封包傳給 OpenFlow Switch (device)
-應用情境: 假設你在 Controller 收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用 OpenFlow 的 Packet-Out message 傳給 Switch
+<meta name="twitter:title" content="Custom packet creation using Ryu and Scapy">
+<meta name="twitter:description" content="這次分享一下如何在 Ryu Controller 下製造一個客製化封包傳給 OpenFlow Switch (device)
+應用情境：假設你在 Controller 收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用 OpenFlow 的 Packet-Out message 傳給 Switch
 這裏有兩種方法，分別是利用 Ryu 與 Scapy 皆可以產生客製化封包，以下提供你參考">
 <meta name="twitter:creator" content="@[object Object]">
 
@@ -105,7 +105,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Custom Packet creation using Ryu and Scapy
+      Custom packet creation using Ryu and Scapy
     </h1>
   
 
@@ -113,8 +113,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>這次分享一下如何在 Ryu Controller 下製造一個封包傳給 OpenFlow Switch (device)</p>
-<p>應用情境: 假設你在 Controller 收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用 OpenFlow 的 Packet-Out message 傳給 Switch</p>
+        <p>這次分享一下如何在 Ryu Controller 下製造一個客製化封包傳給 OpenFlow Switch (device)</p>
+<h4 id="應用情境：假設你在_Controller_收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用_OpenFlow_的_Packet-Out_message_傳給_Switch">應用情境：假設你在 Controller 收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用 OpenFlow 的 Packet-Out message 傳給 Switch</h4>
 <p>這裏有兩種方法，分別是利用 Ryu 與 Scapy 皆可以產生客製化封包，以下提供你參考</p>
 <a id="more"></a>
 
@@ -137,12 +137,12 @@
 <p>緊接著來做封包，用了 Scapy 十分容易</p>
 <figure class="highlight python"><figcaption><span>build_pkt_scapy.py</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> ryu.lib <span class="keyword">import</span> pcaplib</div><div class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> Ether, IP, TCP</div><div class="line"></div><div class="line">pcap_pen = pcaplib.Writer(open(<span class="string">'pkt_build_from_scapy.pcap'</span>, <span class="string">'wb'</span>))</div><div class="line"><span class="comment"># Creat pcap file writer instance</span></div><div class="line"></div><div class="line">eth = Ether(src=<span class="string">'70:56:81:12:34:56'</span>, dst=<span class="string">'84:94:56:12:34:44'</span>)</div><div class="line"></div><div class="line">ip = IP(src=<span class="string">'192.168.8.70'</span>, dst=<span class="string">'192.168.8.50'</span>)</div><div class="line"></div><div class="line">tcp_rst = TCP(sport= <span class="number">5566</span>, dport=<span class="number">8080</span>, seq= <span class="number">1234566</span>)</div><div class="line"></div><div class="line">pkt = eth/ip/tcp_rst</div><div class="line"><span class="comment"># Combine</span></div><div class="line"></div><div class="line">pcap_pen.write_pkt(pkt)</div><div class="line"><span class="comment"># Write to pcap file</span></div></pre></td></tr></table></figure>
 
-<p>以上兩種方法皆可以做出封包，並且輕易的存成 PCAP file 讓你用 Wireshark 去檢查是不是有問題，<br>所以好 Ryu 不用嗎? XD</p>
+<p>以上兩種方法皆可以做出封包，並且輕易的存成 PCAP file 讓你用 Wireshark 去檢查是不是有問題，所以好 Ryu 不用嗎? XD</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/" data-id="blqbafg21hwoa3mj" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/" data-id="cxjlm66l9kqr47ao" class="article-share-link">Share</a>
       
         <a href="http://linton.tw/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -203,7 +203,7 @@
       <ul>
         
           <li>
-            <a href="/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/">Custom Packet creation using Ryu and Scapy</a>
+            <a href="/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/">Custom packet creation using Ryu and Scapy</a>
           </li>
         
           <li>
