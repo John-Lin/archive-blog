@@ -110,33 +110,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>這次分享一下如何在 Ryu Controller 下製造一個封包傳給 OpenFlow Switch (device)</p>
-<p>應用情境: 假設你在 Controller 收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用 OpenFlow 的 Packet-Out message 傳給 Switch</p>
-<p>這裏有兩種方法，分別是利用 Ryu 與 Scapy 皆可以產生客製化封包，以下提供你參考</p>
-<h3 id="Ryu_Framework">Ryu Framework</h3>
-<p>幾個步驟需要注意：</p>
-<ol>
-<li>利用 ryu.lib.packet.packet.Packet 產生一個物件 pkt</li>
-<li>利用 pkt.add_protocol() 堆疊各種網路協定像是(ethernet, ipv4, tcp)，並把每一層需要填入的資訊塞進去</li>
-<li>最後用 pkt.serialize() 包裝封包，checksum 會在這時候算好不用擔心</li>
-<li>pkt.data 就會是整個封包的 binary</li>
-<li>要確認有沒有把封包打包完成可以用 pcaplib 存成 pcap 檔，可以用 Wireshark 做確認<br>pcaplib 是我之前寫的現在已經在收錄進 Ryu project 使用方式可以參考這篇 <a href="http://linton.tw/2015/01/26/saving-captured-packets-in-ryu-controller/" target="_blank" rel="external">Saving captured packets in Ryu controller</a></li>
-</ol>
-<figure class="highlight python"><figcaption><span>build_pkt_ryu.py</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> ryu.lib.packet <span class="keyword">import</span> packet</div><div class="line"><span class="keyword">from</span> ryu.lib.packet <span class="keyword">import</span> ethernet</div><div class="line"><span class="keyword">from</span> ryu.lib.packet <span class="keyword">import</span> ipv4</div><div class="line"><span class="keyword">from</span> ryu.lib.packet <span class="keyword">import</span> tcp</div><div class="line"><span class="keyword">from</span> ryu.lib <span class="keyword">import</span> pcaplib</div><div class="line"></div><div class="line"></div><div class="line">pcap_pen = pcaplib.Writer(open(<span class="string">'pkt_build_from_ryu.pcap'</span>, <span class="string">'wb'</span>))</div><div class="line"><span class="comment"># Creat pcap file writer instance</span></div><div class="line"></div><div class="line">pkt = packet.Packet()</div><div class="line"><span class="comment"># Creat an empty Packet instance</span></div><div class="line"></div><div class="line">pkt.add_protocol(ethernet.ethernet(ethertype=<span class="string">'0x0800'</span>,</div><div class="line">                                   dst=<span class="string">'70:56:81:12:34:56'</span>,</div><div class="line">                                   src=<span class="string">'70:56:81:65:43:21'</span>))</div><div class="line"><span class="comment"># Add ethernet protocol with ether type IP protocol and mac addresses</span></div><div class="line"></div><div class="line">pkt.add_protocol(ipv4.ipv4(dst=<span class="string">'192.168.8.70'</span>,</div><div class="line">                           src=<span class="string">'192.168.8.50'</span>,</div><div class="line">                           proto=<span class="number">6</span>))</div><div class="line"><span class="comment"># Add ipv4 protocol with IP addresses and TCP protocol which is 6</span></div><div class="line"></div><div class="line"></div><div class="line">pkt.add_protocol(tcp.tcp(src_port=<span class="number">5566</span>,</div><div class="line">                         dst_port=<span class="number">8080</span>,</div><div class="line">                         seq=<span class="number">1234566</span>))</div><div class="line"><span class="comment"># Add tcp protocol with port numbers and sequence number</span></div><div class="line"></div><div class="line">pkt.serialize()</div><div class="line"><span class="comment"># Packet serializing</span></div><div class="line"></div><div class="line">bin_packet = pkt.data</div><div class="line"></div><div class="line">pcap_pen.write_pkt(bin_packet)</div><div class="line"><span class="comment"># Write to pcap file</span></div></pre></td></tr></table></figure>
 
-<h3 id="Scapy_Framework">Scapy Framework</h3>
-<p>這是最簡單的方式作出封包，但是需要安裝 <a href="http://www.secdev.org/projects/scapy/" target="_blank" rel="external">Scapy</a> 的 package</p>
-<p>安裝方法</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">sudo</span> pip install scapy</div></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight python"><figcaption><span>build_pkt_scapy.py</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> Ether, IP, TCP</div><div class="line"></div><div class="line">pcap_pen = pcaplib.Writer(open(<span class="string">'pkt_build_from_scapy.pcap'</span>, <span class="string">'wb'</span>))</div><div class="line"><span class="comment"># Creat pcap file writer instance</span></div><div class="line"></div><div class="line">eth = Ether(src=<span class="string">'70:56:81:12:34:56'</span>, dst=<span class="string">'84:94:56:12:34:44'</span>)</div><div class="line"></div><div class="line">ip = IP(src=<span class="string">'192.168.8.70'</span>, dst=<span class="string">'192.168.8.50'</span>)</div><div class="line"></div><div class="line">tcp_rst = TCP(sport= <span class="number">5566</span>, dport=<span class="number">8080</span>, seq= <span class="number">1234566</span>)</div><div class="line"></div><div class="line">pkt = eth/ip/tcp_rst</div><div class="line"><span class="comment"># Combine</span></div><div class="line"></div><div class="line">pcap_pen.write_pkt(pkt)</div><div class="line"><span class="comment"># Write to pcap file</span></div></pre></td></tr></table></figure>
-
-
+        
+          <p class="article-more-link">
+            <a href="/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/" data-id="hvnkb6m1r9ihp0b6" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/" data-id="n4iv1r5hkvb1rpe7" class="article-share-link">Share</a>
       
         <a href="http://linton.tw/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -187,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2015/02/18/An-install-script-and-guide-for-Ryu/" data-id="1umd9rwmqockcl14" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2015/02/18/An-install-script-and-guide-for-Ryu/" data-id="z0ksnye9jfcjtg6z" class="article-share-link">Share</a>
       
         <a href="http://linton.tw/2015/02/18/An-install-script-and-guide-for-Ryu/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -235,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2015/01/26/saving-captured-packets-in-ryu-controller/" data-id="x15hr0rc4faxh3zs" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2015/01/26/saving-captured-packets-in-ryu-controller/" data-id="o1f1znqurnpyi0y8" class="article-share-link">Share</a>
       
         <a href="http://linton.tw/2015/01/26/saving-captured-packets-in-ryu-controller/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -282,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/" data-id="oj7ej35437a36h36" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/" data-id="ttu8va4dmd9wbscy" class="article-share-link">Share</a>
       
         <a href="http://linton.tw/2014/09/03/Ryu-with-Snort-Integration/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -332,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2014/08/11/NTT-Network-Innovation-Laboratories-SDN-Seminar/" data-id="xj47cgxaw15vsqix" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2014/08/11/NTT-Network-Innovation-Laboratories-SDN-Seminar/" data-id="haobufjwobxsfqtt" class="article-share-link">Share</a>
       
         <a href="http://linton.tw/2014/08/11/NTT-Network-Innovation-Laboratories-SDN-Seminar/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -381,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2014/05/15/learned-how-to-develop-sdn-openflow-applications/" data-id="gmk45a3rdrmv58e4" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2014/05/15/learned-how-to-develop-sdn-openflow-applications/" data-id="i0bou5hlrcsibugo" class="article-share-link">Share</a>
       
         <a href="http://linton.tw/2014/05/15/learned-how-to-develop-sdn-openflow-applications/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -430,7 +413,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2014/02/15/note-install-ryu-36-sdn-framework/" data-id="kd9kun161tda7o1o" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2014/02/15/note-install-ryu-36-sdn-framework/" data-id="2lc67tsrurxgacyo" class="article-share-link">Share</a>
       
         <a href="http://linton.tw/2014/02/15/note-install-ryu-36-sdn-framework/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -477,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2014/02/09/note-ryu-controller-app-dumb-layer-2-switch/" data-id="zvi0r280qew4gjq1" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2014/02/09/note-ryu-controller-app-dumb-layer-2-switch/" data-id="gp4eict0s41iveil" class="article-share-link">Share</a>
       
         <a href="http://linton.tw/2014/02/09/note-ryu-controller-app-dumb-layer-2-switch/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -533,7 +516,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2014/01/11/install-ryu-3-5-sdn-framework/" data-id="cfc81ur8r5un91zq" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2014/01/11/install-ryu-3-5-sdn-framework/" data-id="c0dgd4n47gqq3psf" class="article-share-link">Share</a>
       
         <a href="http://linton.tw/2014/01/11/install-ryu-3-5-sdn-framework/#disqus_thread" class="article-comment-link">Comments</a>
       
