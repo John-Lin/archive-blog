@@ -3,24 +3,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>PyInstaller 2.0 使用簡介 | John&#39;s Lin Blog</title>
+  <title>Custom Packet creation using Ryu and Scapy | John&#39;s Lin Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Python 在 Windows 下開發應用程式
-
-Linux 或 Mac OS X 已經內建 Python 的直譯器，可以在終端機下指令直接運行Python Scripts，而 Windows 因為沒有內建 Python 直譯器所以通常 Windows User 都需要去下載Python的直譯器，才能運行 Python Scripts。通常開發完成的 Python Script 想要給別人使用，">
+  <meta name="description" content="這次分享一下如何在 Ryu Controller 下製造一個封包傳給 OpenFlow Switch (device)
+應用情境: 假設你在 Controller 收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用 OpenFlow 的 Packet-Out message 傳給 Switch
+這裏有兩種方法，分別是利用 Ryu 與 Scapy 皆可以產生客製化封包，以下提供你參考
+R">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PyInstaller 2.0 使用簡介">
-<meta property="og:url" content="http://linton.tw/2013/10/08/introduction-to-working-with-pyinstaller20/">
+<meta property="og:title" content="Custom Packet creation using Ryu and Scapy">
+<meta property="og:url" content="http://linton.tw/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/">
 <meta property="og:site_name" content="John's Lin Blog">
-<meta property="og:description" content="Python 在 Windows 下開發應用程式
-
-Linux 或 Mac OS X 已經內建 Python 的直譯器，可以在終端機下指令直接運行Python Scripts，而 Windows 因為沒有內建 Python 直譯器所以通常 Windows User 都需要去下載Python的直譯器，才能運行 Python Scripts。通常開發完成的 Python Script 想要給別人使用，">
-<meta property="og:image" content="https://cdn1.iconfinder.com/data/icons/oxygen/128x128/mimetypes/application-x-python.png">
+<meta property="og:description" content="這次分享一下如何在 Ryu Controller 下製造一個封包傳給 OpenFlow Switch (device)
+應用情境: 假設你在 Controller 收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用 OpenFlow 的 Packet-Out message 傳給 Switch
+這裏有兩種方法，分別是利用 Ryu 與 Scapy 皆可以產生客製化封包，以下提供你參考
+R">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PyInstaller 2.0 使用簡介">
-<meta name="twitter:description" content="Python 在 Windows 下開發應用程式
-
-Linux 或 Mac OS X 已經內建 Python 的直譯器，可以在終端機下指令直接運行Python Scripts，而 Windows 因為沒有內建 Python 直譯器所以通常 Windows User 都需要去下載Python的直譯器，才能運行 Python Scripts。通常開發完成的 Python Script 想要給別人使用，">
+<meta name="twitter:title" content="Custom Packet creation using Ryu and Scapy">
+<meta name="twitter:description" content="這次分享一下如何在 Ryu Controller 下製造一個封包傳給 OpenFlow Switch (device)
+應用情境: 假設你在 Controller 收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用 OpenFlow 的 Packet-Out message 傳給 Switch
+這裏有兩種方法，分別是利用 Ryu 與 Scapy 皆可以產生客製化封包，以下提供你參考
+R">
 <meta name="twitter:creator" content="@[object Object]">
 
   
@@ -92,10 +94,10 @@ Linux 或 Mac OS X 已經內建 Python 的直譯器，可以在終端機下指�
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-introduction-to-working-with-pyinstaller20" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Custom-Packet-creation-using-Ryu-and-Scapy" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2013/10/08/introduction-to-working-with-pyinstaller20/" class="article-date">
-  <time datetime="2013-10-08T10:30:00.000Z" itemprop="datePublished">10月 8 2013</time>
+    <a href="/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/" class="article-date">
+  <time datetime="2015-03-21T17:02:18.000Z" itemprop="datePublished">3月 22 2015</time>
 </a>
     
   </div>
@@ -106,7 +108,7 @@ Linux 或 Mac OS X 已經內建 Python 的直譯器，可以在終端機下指�
         
   
     <h1 class="article-title" itemprop="name">
-      PyInstaller 2.0 使用簡介
+      Custom Packet creation using Ryu and Scapy
     </h1>
   
 
@@ -114,38 +116,39 @@ Linux 或 Mac OS X 已經內建 Python 的直譯器，可以在終端機下指�
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Python_在_Windows_下開發應用程式">Python 在 Windows 下開發應用程式</h3>
-<hr>
-<p>Linux 或 Mac OS X 已經內建 Python 的直譯器，可以在終端機下指令直接運行Python Scripts，而 Windows 因為沒有內建 Python 直譯器所以通常 Windows User 都需要去下載Python的直譯器，才能運行 Python Scripts。通常開發完成的 Python Script 想要給別人使用，還需要請他安裝 Python 十分的不方便，如果有一個模組能幫你的 Python Scripts 打包為執行檔 (.exe) ，那你開發的程式就可以傳給大家直接運行，豈不方便？</p>
-<h3 id="PyInstaller">PyInstaller</h3>
-<hr>
-<p><a href="http://www.pyinstaller.org/" target="_blank" rel="external">PyInstaller</a> 是一個 Python 的第三方程式用 Python 寫的，專門打包 Python Scripts 轉成執行檔 (.exe) 目前最新版本為 PyInstaller 2.0 它不需要安裝，解壓縮後就可以直接使用。</p>
-<a id="more"></a>
+        <p>這次分享一下如何在 Ryu Controller 下製造一個封包傳給 OpenFlow Switch (device)</p>
+<p>應用情境: 假設你在 Controller 收到某個封包之後又或是在某個條件下，需要先產生一個封包並且使用 OpenFlow 的 Packet-Out message 傳給 Switch</p>
+<p>這裏有兩種方法，分別是利用 Ryu 與 Scapy 皆可以產生客製化封包，以下提供你參考</p>
+<h3 id="Ryu_Framework">Ryu Framework</h3>
+<p>幾個步驟需要注意：</p>
+<ol>
+<li>利用 ryu.lib.packet.packet.Packet 產生一個物件 pkt</li>
+<li>利用 pkt.add_protocol() 堆疊各種網路協定像是(ethernet, ipv4, tcp)，並把每一層需要填入的資訊塞進去</li>
+<li>最後用 pkt.serialize() 包裝封包，checksum 會在這時候算好不用擔心</li>
+<li>pkt.data 就會是整個封包的 binary</li>
+<li>要確認有沒有把封包打包完成可以用 pcaplib 存成 pcap 檔，可以用 Wireshark 做確認<br>pcaplib 是我之前寫的現在已經在收錄進 Ryu project 使用方式可以參考這篇 <a href="http://linton.tw/2015/01/26/saving-captured-packets-in-ryu-controller/" target="_blank" rel="external">Saving captured packets in Ryu controller</a></li>
+</ol>
+<figure class="highlight python"><figcaption><span>build_pkt_ryu.py</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> ryu.lib.packet <span class="keyword">import</span> packet</div><div class="line"><span class="keyword">from</span> ryu.lib.packet <span class="keyword">import</span> ethernet</div><div class="line"><span class="keyword">from</span> ryu.lib.packet <span class="keyword">import</span> ipv4</div><div class="line"><span class="keyword">from</span> ryu.lib.packet <span class="keyword">import</span> tcp</div><div class="line"><span class="keyword">from</span> ryu.lib <span class="keyword">import</span> pcaplib</div><div class="line"></div><div class="line"></div><div class="line">pcap_pen = pcaplib.Writer(open(<span class="string">'pkt_build_from_ryu.pcap'</span>, <span class="string">'wb'</span>))</div><div class="line"><span class="comment"># Creat pcap file writer instance</span></div><div class="line"></div><div class="line">pkt = packet.Packet()</div><div class="line"><span class="comment"># Creat an empty Packet instance</span></div><div class="line"></div><div class="line">pkt.add_protocol(ethernet.ethernet(ethertype=<span class="string">'0x0800'</span>,</div><div class="line">                                   dst=<span class="string">'70:56:81:12:34:56'</span>,</div><div class="line">                                   src=<span class="string">'70:56:81:65:43:21'</span>))</div><div class="line"><span class="comment"># Add ethernet protocol with ether type IP protocol and mac addresses</span></div><div class="line"></div><div class="line">pkt.add_protocol(ipv4.ipv4(dst=<span class="string">'192.168.8.70'</span>,</div><div class="line">                           src=<span class="string">'192.168.8.50'</span>,</div><div class="line">                           proto=<span class="number">6</span>))</div><div class="line"><span class="comment"># Add ipv4 protocol with IP addresses and TCP protocol which is 6</span></div><div class="line"></div><div class="line"></div><div class="line">pkt.add_protocol(tcp.tcp(src_port=<span class="number">5566</span>,</div><div class="line">                         dst_port=<span class="number">8080</span>,</div><div class="line">                         seq=<span class="number">1234566</span>))</div><div class="line"><span class="comment"># Add tcp protocol with port numbers and sequence number</span></div><div class="line"></div><div class="line">pkt.serialize()</div><div class="line"><span class="comment"># Packet serializing</span></div><div class="line"></div><div class="line">bin_packet = pkt.data</div><div class="line"></div><div class="line">pcap_pen.write_pkt(bin_packet)</div><div class="line"><span class="comment"># Write to pcap file</span></div></pre></td></tr></table></figure>
 
-<h3 id="使用方法簡介">使用方法簡介</h3>
-<hr>
-<p><strong>需求:</strong> <strong>注意 Windows 平台下，需要安裝 <a href="http://sourceforge.net/projects/pywin32/" target="_blank" rel="external">Pywin32</a>否則會失敗</strong></p>
-<p>若想要打包出執行檔 (.exe)需要在 Windows 的環境下，使用 <strong>命令提示字元</strong> (cmd) 輸入以下指令就可以開始打包應用程式</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">python</span> pyinstaller.<span class="keyword">py</span> -<span class="keyword">n</span> app_name -F -<span class="keyword">d</span> -<span class="keyword">i</span> icon_path/app.ico app_path/app.<span class="keyword">py</span></div></pre></td></tr></table></figure>
+<h3 id="Scapy_Framework">Scapy Framework</h3>
+<p>這是最簡單的方式作出封包，但是需要安裝 <a href="http://www.secdev.org/projects/scapy/" target="_blank" rel="external">Scapy</a> 的 package</p>
+<p>安裝方法</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">sudo</span> pip install scapy</div></pre></td></tr></table></figure>
 
-<h5 id="參數意義">參數意義</h5>
-<blockquote>
-<p> -n 將執行檔直接命名<br> -F 打包出一個可執行檔<br> -D 打包出一整個資料夾，內含所有的支援檔案(預設)<br> -d 開啓Debug模式<br> -i 加入客制化的icons</p>
-</blockquote>
-<h3 id="漂亮的icon去哪找？">漂亮的icon去哪找？</h3>
-<hr>
-<p><img src="https://cdn1.iconfinder.com/data/icons/oxygen/128x128/mimetypes/application-x-python.png" alt="python_icon"></p>
-<p>我想會用 Pyinstaller 的原因除了可以直接將 Python Script 包成執行檔之外，另一個原因就是可以客制化漂亮的icons。介紹一個網站 <a href="https://www.iconfinder.com/" target="_blank" rel="external">ICONFINDER</a> 這裡的icon size很齊全，可以直接搜尋關鍵字 (tag) 就會出現很多免費且漂亮的 icon ，下載後就有各種 size ，打包應用程式後需注意因為 Windows 可以 Zoom in &amp; Zoom out icon所以當你下載的 icon 沒有足夠的 size 會出現 <strong>內建的 icon</strong> 這點稍微小心。</p>
+
+
+<figure class="highlight python"><figcaption><span>build_pkt_scapy.py</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> Ether, IP, TCP</div><div class="line"></div><div class="line">pcap_pen = pcaplib.Writer(open(<span class="string">'pkt_build_from_scapy.pcap'</span>, <span class="string">'wb'</span>))</div><div class="line"><span class="comment"># Creat pcap file writer instance</span></div><div class="line"></div><div class="line">eth = Ether(src=<span class="string">'70:56:81:12:34:56'</span>, dst=<span class="string">'84:94:56:12:34:44'</span>)</div><div class="line"></div><div class="line">ip = IP(src=<span class="string">'192.168.8.70'</span>, dst=<span class="string">'192.168.8.50'</span>)</div><div class="line"></div><div class="line">tcp_rst = TCP(sport= <span class="number">5566</span>, dport=<span class="number">8080</span>, seq= <span class="number">1234566</span>)</div><div class="line"></div><div class="line">pkt = eth/ip/tcp_rst</div><div class="line"><span class="comment"># Combine</span></div><div class="line"></div><div class="line">pcap_pen.write_pkt(pkt)</div><div class="line"><span class="comment"># Write to pcap file</span></div></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://linton.tw/2013/10/08/introduction-to-working-with-pyinstaller20/" data-id="3h26cy5o48rwc2iq" class="article-share-link">Share</a>
+      <a data-url="http://linton.tw/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/" data-id="hvnkb6m1r9ihp0b6" class="article-share-link">Share</a>
       
-        <a href="http://linton.tw/2013/10/08/introduction-to-working-with-pyinstaller20/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://linton.tw/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/#disqus_thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pyinstaller/">Pyinstaller</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenFlow/">OpenFlow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ryu/">Ryu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SDN/">SDN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scapy/">Scapy</a></li></ul>
 
     </footer>
   </div>
@@ -153,19 +156,10 @@ Linux 或 Mac OS X 已經內建 Python 的直譯器，可以在終端機下指�
     
 <nav id="article-nav">
   
-    <a href="/2013/10/13/help-to-compile-java-source-code-graphical-interface/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          協助編譯 Java Source Code 的圖形化界面
-        
-      </div>
-    </a>
   
-  
-    <a href="/2013/09/06/set-up-linux-mint-15/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/02/18/An-install-script-and-guide-for-Ryu/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">安裝 Linux Mint 15 &amp; Windows 7 雙作業系統</div>
+      <div class="article-nav-title">An install script and guide for Ryu</div>
     </a>
   
 </nav>
@@ -264,7 +258,7 @@ Linux 或 Mac OS X 已經內建 Python 的直譯器，可以在終端機下指�
 <script>
   var disqus_shortname = 'lintontw';
   
-  var disqus_url = 'http://linton.tw/2013/10/08/introduction-to-working-with-pyinstaller20/';
+  var disqus_url = 'http://linton.tw/2015/03/22/Custom-Packet-creation-using-Ryu-and-Scapy/';
   
   (function(){
     var dsq = document.createElement('script');
